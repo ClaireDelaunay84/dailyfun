@@ -22,15 +22,32 @@ export default function Home() {
     return (
         <main className={styles.main}>
             {/* ── BOUTON BUY ME A COFFEE ── */}
+            {/* Desktop : en haut à droite */}
             <div style={{
                 position: "absolute",
                 top: "16px",
                 right: "24px",
                 zIndex: 10,
-            }}>
+            }} className={styles.bmcDesktop}>
                 <a href="https://www.buymeacoffee.com/dailyfun">
                     <img
-                        src="https://img.buymeacoffee.com/button-api/?text=Soutenir le projet&emoji=💡&slug=dailyfun&button_colour=a78bfa&font_colour=ffffff&font_family=Poppins&outline_colour=000000&coffee_colour=FFDD00"
+                        src="https://img.buymeacoffee.com/button-api/?text=Soutenir le projet&emoji=💡&slug=dailyfun&button_colour=e8e0ff&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=FFDD00"
+                        alt="Soutenir le projet"
+                        style={{ height: "36px" }}
+                    />
+                </a>
+            </div>
+
+            {/* Mobile : flottant en bas */}
+            <div style={{
+                position: "fixed",
+                bottom: "16px",
+                right: "16px",
+                zIndex: 100,
+            }} className={styles.bmcMobile}>
+                <a href="https://www.buymeacoffee.com/dailyfun">
+                    <img
+                        src="https://img.buymeacoffee.com/button-api/?text=Soutenir le projet&emoji=💡&slug=dailyfun&button_colour=e8e0ff&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=FFDD00"
                         alt="Soutenir le projet"
                         style={{ height: "36px" }}
                     />

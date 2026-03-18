@@ -106,3 +106,16 @@
         height: auto;
     }
 }
+
+.bmcMobile {
+    display: none;
+}
+
+@media (max-width: 640px) {
+    .bmcDesktop {
+        display: none;
+    }
+    .bmcMobile {
+        display: block;
+    }
+}
