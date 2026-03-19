@@ -9,7 +9,7 @@ import SaviezVousCard from "./components/SaviezVousCard"
 import ArriveCard from "./components/ArriveCard"
 import NaissancesCard from "./components/NaissancesCard"
 import DecesCard from "./components/DecesCard"
-
+export const revalidate = 0
 export default function Home() {
     const today = new Date()
     const dateStr = today.toLocaleDateString("fr-FR", {
