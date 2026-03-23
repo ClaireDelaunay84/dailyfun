@@ -1,0 +1,121 @@
+.main {
+    height: 100dvh;
+    padding: 16px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+/* ── DESKTOP ── */
+.gridLigne1 {
+    display: grid;
+    grid-template-columns: 1.2fr 2fr 1.2fr;
+    gap: 16px;
+    flex: 1;
+    min-height: 0;
+}
+
+.gridLigne2 {
+    display: grid;
+    grid-template-columns: 3fr 1.5fr 1.5fr 1fr;
+    gap: 16px;
+    flex: 1;
+    min-height: 0;
+}
+
+.gridLigne3 {
+    display: grid;
+    grid-template-columns: 1.5fr 2fr 1.5fr;
+    gap: 16px;
+    flex: 1;
+    min-height: 0;
+}
+
+.gridLigne1 > *,
+.gridLigne2 > *,
+.gridLigne3 > * {
+    min-height: 0;
+    height: 100%;
+}
+
+/* ── TABLETTE (< 1024px) ── */
+@media (max-width: 1024px) {
+    .main {
+        height: auto;
+        min-height: 100dvh;
+    }
+
+    .gridLigne1 {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+        flex: none;
+    }
+    .gridLigne1 > *:nth-child(1) { grid-column: 1; grid-row: 2; }
+    .gridLigne1 > *:nth-child(2) { grid-column: 1 / -1; grid-row: 1; }
+    .gridLigne1 > *:nth-child(3) { grid-column: 2; grid-row: 2; }
+
+    .gridLigne2 {
+        grid-template-columns: 1fr 1fr;
+        flex: none;
+    }
+    .gridLigne2 > *:nth-child(1) {
+        grid-column: 1 / -1;
+    }
+
+    .gridLigne3 {
+        grid-template-columns: 1fr;
+        flex: none;
+    }
+
+    .gridLigne1 > *,
+    .gridLigne2 > *,
+    .gridLigne3 > * {
+        height: auto;
+    }
+}
+
+/* ── MOBILE (< 640px) ── */
+@media (max-width: 640px) {
+    .main {
+        padding: 12px;
+        gap: 12px;
+        height: auto;
+        min-height: 100dvh;
+    }
+
+    .gridLigne1,
+    .gridLigne2,
+    .gridLigne3 {
+        grid-template-columns: 1fr;
+        flex: none;
+    }
+
+    .gridLigne1 > *:nth-child(1),
+    .gridLigne1 > *:nth-child(2),
+    .gridLigne1 > *:nth-child(3) {
+        grid-column: unset;
+        grid-row: unset;
+    }
+
+    .gridLigne1 > *,
+    .gridLigne2 > *,
+    .gridLigne3 > * {
+        height: auto;
+    }
+}
+
+.bmcMobile {
+    display: none;
+}
+
+@media (max-width: 640px) {
+    .bmcDesktop {
+        display: none;
+    }
+    .bmcMobile {
+        display: block;
+    }
+}

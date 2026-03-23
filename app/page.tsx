@@ -20,7 +20,7 @@ export default function Home() {
     })
 
     return (
-        <main className={styles.main}>
+        <main className={styles.main} style={{ position: "relative" }}>
             {/* ── BOUTON BUY ME A COFFEE ── */}
             {/* Desktop : en haut à droite */}
             <div style={{
@@ -55,18 +55,16 @@ export default function Home() {
             </div>
             {/* ── HEADER ── */}
             <header style={{textAlign: "center", marginBottom: "4px"}}>
-                <div style={{
-                    fontFamily: "var(--font-poppins)",
-                    fontSize: "2rem",
-                    fontWeight: 700,
-                    background: "linear-gradient(90deg, #A78BFA, #818CF8)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                    lineHeight: 1.2,
-                }}>
-                    ✨ Dailyfun
-                </div>
+                <img
+                    src="/dailyfun_logo_final.png"
+                    alt="Dailyfun"
+                    style={{
+                        height: "80px",
+                        objectFit: "contain",
+                        display: "block",
+                        margin: "0 auto",
+                    }}
+                />
                 <p style={{
                     color: "var(--text-muted)",
                     fontSize: "0.9rem",
