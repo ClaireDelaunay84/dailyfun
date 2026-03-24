@@ -1,28 +1,26 @@
 import Card from "./Card"
 import { getFeteduJour } from "../data/fetes"
-import {
-    IconMeteo, IconFete, IconMonde, IconSavoir,
-    IconCalendrier, IconNaissance, IconDeces,
-    IconDicton, IconProverbe, IconSoleil
-} from "./Icons"
 
 export default function FeteCard() {
     const fete = getFeteduJour()
-
     return (
-        <Card title="Fête du jour" emoji="🎉" accent="#FDE68A">
-            <div style={{ marginTop: "8px" }}>
-                <p style={{ fontSize: "2rem", fontWeight: 700, fontFamily: "var(--font-poppins)", lineHeight: 1.1 }}>
-                    St {fete.prenom}
+        <Card title="Fête du jour" emoji="🎉" bgColor="#c8ece6" accent="#2d6a5e">
+            <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+                <p style={{
+                    fontFamily: "var(--font-licorice)",
+                    fontSize: "3rem",
+                    color: "#2d6a5e",
+                    lineHeight: 1.1,
+                }}>
+                    {fete.prenom}
                 </p>
                 <p style={{
-                    marginTop: "12px",
-                    fontSize: "0.9rem",
-                    lineHeight: 1.7,
+                    fontSize: "0.95rem",
+                    lineHeight: 1.8,
                     color: "var(--text-muted)",
                     fontStyle: "italic",
-                    borderLeft: "3px solid #FFB5A733",
-                    paddingLeft: "12px"
+                    borderLeft: "3px solid #2d6a5e33",
+                    paddingLeft: "14px",
                 }}>
                     {fete.anecdote}
                 </p>

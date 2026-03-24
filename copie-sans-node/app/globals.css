@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+:root {
+  /* ── Palette principale ── */
+  --mint-dark:    #2d4a44;
+  --mint:         #3d8a78;
+  --mint-medium:  #5ab5a0;
+  --mint-light:   #a8d8d0;
+  --lavender:     #c8c0e0;
+  --bg:           #f0faf8;
+
+  /* ── Couleurs par rubrique ── */
+  --color-meteo:      #dce8f4;
+  --color-ephem:      #c8ece6;
+  --color-fete:       #c8ece6;
+  --color-journee:    #d0e8f8;
+  --color-saviez:     #dce8f4;
+  --color-citation:   #e0d8f4;
+  --color-dicton:     #e4ecdc;
+  --color-arrive:     #c8ece6;
+  --color-naissance:  #f0d8ec;
+  --color-deces:      #d0dcea;
+
+  /* ── Accents par rubrique ── */
+  --accent-meteo:     #2d4a6a;
+  --accent-ephem:     #3d8a78;
+  --accent-fete:      #3d8a78;
+  --accent-journee:   #2d5a7a;
+  --accent-saviez:    #2d4a6a;
+  --accent-citation:  #4a3a7a;
+  --accent-dicton:    #4a5a2a;
+  --accent-arrive:    #3d8a78;
+  --accent-naissance: #7a3a6a;
+  --accent-deces:     #3a4a6a;
+
+  /* ── Texte ── */
+  --text-dark:  #2d4a44;
+  --text-muted: #6a8e88;
+
+  /* ── Fonts (variables injectées par next/font) ── */
+  --font-poppins: var(--font-poppins-var, sans-serif);
+  --font-nunito:  var(--font-nunito-var, sans-serif);
+  --font-jost:    var(--font-jost-var, sans-serif);
+  --font-licorice:var(--font-licorice-var, cursive);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background-color: var(--bg);
+  color: var(--text-dark);
+  font-family: var(--font-jost);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+h1, h2, h3 { font-family: var(--font-jost); }
