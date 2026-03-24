@@ -24,6 +24,7 @@ export default function DecesCard() {
     const [index, setIndex] = useState(0)
     const [fading, setFading] = useState(false)
     const [loading, setLoading] = useState(true)
+    const [touchStartX, setTouchStartX] = useState<number | null>(null)
 
     const today = new Date()
     const jour = today.getDate()
@@ -34,47 +35,88 @@ export default function DecesCard() {
     useEffect(()=>{
         fetch(`https://fr.wikipedia.org/api/rest_v1/feed/onthisday/deaths/${MM}/${DD}`)
             .then(r=>r.json()).then(async data=>{
-                const deaths=data?.deaths??[]
-                const avecImg=deaths.filter((b:any)=>b.pages?.[0]?.thumbnail?.source)
-                const sel=avecImg.length>=5?avecImg.slice(0,5):[...avecImg,...deaths.filter((b:any)=>!b.pages?.[0]?.thumbnail?.source)].slice(0,5)
-                const formatted:Personne[]=await Promise.all(sel.map(async(b:any)=>{
-                    const description=b.pages?.[0]?.description??b.text??""
-                    const nom=b.pages?.[0]?.titles?.normalized??b.text?.split(",")[0]??"Inconnu"
-                    let extrait:string|null=b.pages?.[0]?.extract??null
-                    if(!extrait&&nom!=="Inconnu"){
-                        try{const r=await fetch(`https://fr.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(nom)}`);extrait=(await r.json())?.extract??null}catch{}
-                    }
-                    let anneeNaissance:number|null=null
-                    if(extrait){const m=extrait.match(/née? (?:le )?\d{1,2}[^\d]+(\d{4})|(\d{4})\s*[-–]\s*\d{4}/);if(m)anneeNaissance=parseInt(m[1]??m[2])}
-                    return{nom,anneeNaissance,anneeDeces:b.year,age:anneeNaissance?b.year-anneeNaissance:null,description,emoji:getEmoji(description),imageUrl:b.pages?.[0]?.thumbnail?.source?.replace(/\/\d+px-/,"/400px-")??null,extrait}
-                }))
-                setPersonnes(formatted);setLoading(false)
-            }).catch(()=>setLoading(false))
+            const deaths=data?.deaths??[]
+            const avecImg=deaths.filter((b:any)=>b.pages?.[0]?.thumbnail?.source)
+            const sel=avecImg.length>=5?avecImg.slice(0,5):[...avecImg,...deaths.filter((b:any)=>!b.pages?.[0]?.thumbnail?.source)].slice(0,5)
+            const formatted:Personne[]=await Promise.all(sel.map(async(b:any)=>{
+                const description=b.pages?.[0]?.description??b.text??""
+                const nom=b.pages?.[0]?.titles?.normalized??b.text?.split(",")[0]??"Inconnu"
+                let extrait:string|null=b.pages?.[0]?.extract??null
+                if(!extrait&&nom!=="Inconnu"){
+                    try{const r=await fetch(`https://fr.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(nom)}`);extrait=(await r.json())?.extract??null}catch{}
+                }
+                let anneeNaissance:number|null=null
+                if(extrait){const m=extrait.match(/née? (?:le )?\d{1,2}[^\d]+(\d{4})|(\d{4})\s*[-–]\s*\d{4}/);if(m)anneeNaissance=parseInt(m[1]??m[2])}
+                return{nom,anneeNaissance,anneeDeces:b.year,age:anneeNaissance?b.year-anneeNaissance:null,description,emoji:getEmoji(description),imageUrl:b.pages?.[0]?.thumbnail?.source?.replace(/\/\d+px-/,"/400px-")??null,extrait}
+            }))
+            setPersonnes(formatted);setLoading(false)
+        }).catch(()=>setLoading(false))
     },[MM,DD])
 
     useEffect(()=>{
-        if(personnes.length<=1)return
-        const t=setTimeout(()=>{
-            const iv=setInterval(()=>{setFading(true);setTimeout(()=>{setIndex(i=>(i+1)%personnes.length);setFading(false)},300)},20000)
-            return()=>clearInterval(iv)
-        },17000)
-        return()=>clearTimeout(t)
+        if(personnes.length<=1) return
+        const interval = setInterval(()=>{
+            setIndex(i=>(i+1)%personnes.length)
+        }, 20000)
+        return()=>clearInterval(interval)
     },[personnes.length])
 
-    const goTo=(i:number)=>{setFading(true);setTimeout(()=>{setIndex(i);setFading(false)},300)}
-    const current=personnes[index]
+    const goTo = (i:number) => { setFading(true); setTimeout(()=>{setIndex(i);setFading(false)},300) }
+    const goPrev = () => goTo((index - 1 + personnes.length) % personnes.length)
+    const goNext = () => goTo((index + 1) % personnes.length)
+
+    const current = personnes[index]
 
     return (
         <Card title={`Ils sont partis un ${jour} ${mois}`} emoji="🕯️" bgColor="#d0dcea" accent="#3a4a6a">
-            {personnes.length>1&&(
-                <div style={{display:"flex",gap:"6px",marginBottom:"18px"}}>
-                    {personnes.map((_,i)=>(
-                        <div key={i} onClick={()=>goTo(i)} style={{height:"3px",flex:1,borderRadius:"4px",cursor:"pointer",background:i===index?"#3a4a6a":"#3a4a6a22",transition:"background 0.3s"}} />
-                    ))}
+
+            {/* ── NAVIGATION ── */}
+            {personnes.length > 1 && (
+                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
+
+                    <button onClick={goPrev} style={{
+                        width: "34px", height: "34px", borderRadius: "50%",
+                        border: "1.5px solid #3a4a6a44", background: "rgba(255,255,255,0.7)",
+                        cursor: "pointer", fontSize: "16px", display: "flex",
+                        alignItems: "center", justifyContent: "center", flexShrink: 0,
+                        color: "#3a4a6a", transition: "background 0.2s",
+                    }}>‹</button>
+
+                    <div style={{ display: "flex", gap: "6px", flex: 1, justifyContent: "center" }}>
+                        {personnes.map((_, i) => (
+                            <button key={i} onClick={() => goTo(i)} style={{
+                                width: i === index ? "22px" : "10px",
+                                height: "10px", borderRadius: "20px",
+                                background: i === index ? "#3a4a6a" : "#3a4a6a33",
+                                border: "none", cursor: "pointer", padding: 0,
+                                transition: "all 0.3s ease",
+                            }} />
+                        ))}
+                    </div>
+
+                    <button onClick={goNext} style={{
+                        width: "34px", height: "34px", borderRadius: "50%",
+                        border: "1.5px solid #3a4a6a44", background: "rgba(255,255,255,0.7)",
+                        cursor: "pointer", fontSize: "16px", display: "flex",
+                        alignItems: "center", justifyContent: "center", flexShrink: 0,
+                        color: "#3a4a6a", transition: "background 0.2s",
+                    }}>›</button>
+
                 </div>
             )}
-            {loading?<p style={{color:"var(--text-muted)"}}>Chargement...</p>:current?(
-                <div style={{opacity:fading?0:1,transition:"opacity 0.3s"}}>
+
+            {/* ── CONTENU avec swipe ── */}
+            {loading ? <p style={{color:"var(--text-muted)"}}>Chargement...</p> : current ? (
+                <div
+                    onTouchStart={e => setTouchStartX(e.touches[0].clientX)}
+                    onTouchEnd={e => {
+                        if (touchStartX === null) return
+                        const diff = touchStartX - e.changedTouches[0].clientX
+                        if (Math.abs(diff) > 40) diff > 0 ? goNext() : goPrev()
+                        setTouchStartX(null)
+                    }}
+                    style={{opacity:fading?0:1,transition:"opacity 0.3s"}}
+                >
                     <div style={{display:"flex",gap:"16px",alignItems:"center",marginBottom:"14px"}}>
                         <div style={{position:"relative",flexShrink:0}}>
                             <div style={{width:"76px",height:"76px",borderRadius:"50%",overflow:"hidden",background:"rgba(58,74,106,0.1)",border:"2px solid #3a4a6a33",display:"flex",alignItems:"center",justifyContent:"center"}}>
@@ -104,6 +146,7 @@ export default function DecesCard() {
                     )}
                 </div>
             ):<p style={{color:"var(--text-muted)"}}>Aucun décès trouvé.</p>}
+
         </Card>
     )
 }
