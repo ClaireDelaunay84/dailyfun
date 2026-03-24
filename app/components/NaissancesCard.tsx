@@ -146,7 +146,7 @@ export default function NaissancesCard() {
                             </div>
                         </div>
                         {current.extrait && (
-                            <p style={{ fontSize: "0.82rem", lineHeight: 1.7, color: "var(--text-muted)", marginTop: "14px", borderLeft: "3px solid #7a3a6a33", paddingLeft: "12px", display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical" as const, overflow: "hidden" }}>
+                            <p style={{ fontSize: "0.82rem", lineHeight: 1.7, color: "var(--text-muted)", marginTop: "14px", borderLeft: "3px solid #7a3a6a33", paddingLeft: "12px", display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical" as const, overflow: "visible" }}>
                                 {current.extrait}
                             </p>
                         )}

@@ -140,7 +140,7 @@ export default function DecesCard() {
                         </div>
                     </div>
                     {current.extrait&&(
-                        <p style={{fontSize:"0.85rem",lineHeight:1.75,color:"var(--text-muted)",borderLeft:"3px solid #3a4a6a33",paddingLeft:"14px",display:"-webkit-box",WebkitLineClamp:3,WebkitBoxOrient:"vertical" as const,overflow:"hidden"}}>
+                        <p style={{fontSize:"0.85rem",lineHeight:1.75,color:"var(--text-muted)",borderLeft:"3px solid #3a4a6a33",paddingLeft:"14px",display:"-webkit-box",WebkitLineClamp:3,WebkitBoxOrient:"vertical" as const,overflow:"visible"}}>
                             {current.extrait}
                         </p>
                     )}
