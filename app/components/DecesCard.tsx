@@ -33,7 +33,7 @@ export default function DecesCard() {
     const DD = String(today.getDate()).padStart(2,"0")
 
     useEffect(()=>{
-        fetch(`https://fr.wikipedia.org/api/rest_v1/feed/onthisday/deaths/${MM}/${DD}`)
+        fetch(`https://api.wikimedia.org/feed/v1/wikipedia/fr/onthisday/deaths/${MM}/${DD}`)
             .then(r=>r.json()).then(async data=>{
             const deaths=data?.deaths??[]
             const avecImg=deaths.filter((b:any)=>b.pages?.[0]?.thumbnail?.source)

@@ -35,7 +35,7 @@ export default function NaissancesCard() {
     const DD = String(today.getDate()).padStart(2, "0")
 
     useEffect(() => {
-        fetch(`https://fr.wikipedia.org/api/rest_v1/feed/onthisday/births/${MM}/${DD}`)
+        fetch(`https://api.wikimedia.org/feed/v1/wikipedia/fr/onthisday/births/${MM}/${DD}`)
             .then(res => res.json())
             .then(data => {
                 const births = data?.births ?? []

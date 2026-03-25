@@ -18,7 +18,7 @@ export default function ArriveCard() {
     const DD = String(today.getDate()).padStart(2,"0")
 
     useEffect(() => {
-        fetch(`https://fr.wikipedia.org/api/rest_v1/feed/onthisday/events/${MM}/${DD}`)
+        fetch(`https://api.wikimedia.org/feed/v1/wikipedia/fr/onthisday/events/${MM}/${DD}`)
             .then(r => r.json()).then(data => {
             const sorted = [...(data?.events??[])].sort((a:any,b:any)=>b.year-a.year)
             const step = Math.floor(sorted.length/5)
