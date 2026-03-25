@@ -92,7 +92,10 @@ export async function GET(request: Request) {
         emoji = "💬"
     } else if (slideType === "arrive") {
         try {
-            const res = await fetch(`https://api.wikimedia.org/feed/v1/wikipedia/fr/onthisday/events/${MM}/${DD}`)
+            const res = await fetch(
+                `https://api.wikimedia.org/feed/v1/wikipedia/fr/onthisday/events/${MM}/${DD}`,
+                { headers: { "User-Agent": "Dailyfun/1.0 (https://dailyfun.fr)" } }
+            )
             const data = await res.json()
             const events = data?.events ?? []
             const sorted = [...events].sort((a: any, b: any) => b.year - a.year)
@@ -102,7 +105,10 @@ export async function GET(request: Request) {
         emoji = "📅"
     } else if (slideType === "naissance") {
         try {
-            const res = await fetch(`https://api.wikimedia.org/feed/v1/wikipedia/fr/onthisday/births/${MM}/${DD}`)
+            const res = await fetch(
+                `https://api.wikimedia.org/feed/v1/wikipedia/fr/onthisday/births/${MM}/${DD}`,
+                { headers: { "User-Agent": "Dailyfun/1.0 (https://dailyfun.fr)" } }
+            )
             const data = await res.json()
             const births = data?.births ?? []
             const person = births.filter((b: any) => b.pages?.[0]?.thumbnail?.source)[0] ?? births[0]
@@ -115,7 +121,10 @@ export async function GET(request: Request) {
         emoji = "🎂"
     } else if (slideType === "deces") {
         try {
-            const res = await fetch(`https://api.wikimedia.org/feed/v1/wikipedia/fr/onthisday/deaths/${MM}/${DD}`)
+            const res = await fetch(
+                `https://api.wikimedia.org/feed/v1/wikipedia/fr/onthisday/deaths/${MM}/${DD}`,
+                { headers: { "User-Agent": "Dailyfun/1.0 (https://dailyfun.fr)" } }
+            )
             const data = await res.json()
             const deaths = data?.deaths ?? []
             const person = deaths.filter((b: any) => b.pages?.[0]?.thumbnail?.source)[0] ?? deaths[0]

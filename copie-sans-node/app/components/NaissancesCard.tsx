@@ -24,8 +24,8 @@ function getEmojiMetier(d: string): string {
 export default function NaissancesCard() {
     const [personnes, setPersonnes] = useState<Personne[]>([])
     const [index, setIndex] = useState(0)
-    const [flipped, setFlipped] = useState(false)
     const [loading, setLoading] = useState(true)
+    const [touchStartX, setTouchStartX] = useState<number | null>(null)
 
     const today = new Date()
     const anneeActuelle = today.getFullYear()
@@ -35,7 +35,7 @@ export default function NaissancesCard() {
     const DD = String(today.getDate()).padStart(2, "0")
 
     useEffect(() => {
-        fetch(`https://fr.wikipedia.org/api/rest_v1/feed/onthisday/births/${MM}/${DD}`)
+        fetch(`/api/onthisday?type=births`)
             .then(res => res.json())
             .then(data => {
                 const births = data?.births ?? []
@@ -54,69 +54,107 @@ export default function NaissancesCard() {
             .catch(() => setLoading(false))
     }, [MM, DD])
 
+    // Auto-avance toutes les 20s
     useEffect(() => {
         if (personnes.length <= 1) return
-        const t = setTimeout(() => {
-            const interval = setInterval(() => {
-                setFlipped(true)
-                setTimeout(() => { setIndex(i => (i + 1) % personnes.length); setFlipped(false) }, 600)
-            }, 20000)
-            return () => clearInterval(interval)
-        }, 15000)
-        return () => clearTimeout(t)
+        const interval = setInterval(() => {
+            setIndex(i => (i + 1) % personnes.length)
+        }, 20000)
+        return () => clearInterval(interval)
     }, [personnes.length])
+
+    const goTo = (i: number) => setIndex(i)
+    const goPrev = () => setIndex(i => (i - 1 + personnes.length) % personnes.length)
+    const goNext = () => setIndex(i => (i + 1) % personnes.length)
 
     const current = personnes[index]
 
     return (
-        <div style={{ perspective: "1200px", height: "100%", display: "flex", flexDirection: "column" }}>
-            <div style={{ transition: "transform 0.6s ease", transformStyle: "preserve-3d", transform: flipped ? "rotateX(90deg)" : "rotateX(0deg)", transformOrigin: "center center", flex: 1, display: "flex", flexDirection: "column" }}>
-                <Card title={`Ils sont nés un ${jour} ${mois}`} emoji="🎂" bgColor="#f0d8ec" accent="#7a3a6a">
-                    {personnes.length > 1 && (
-                        <div style={{ display: "flex", gap: "6px", marginBottom: "16px" }}>
-                            {personnes.map((_, i) => (
-                                <div key={i} onClick={() => { setFlipped(true); setTimeout(() => { setIndex(i); setFlipped(false) }, 600) }}
-                                     style={{ height: "3px", flex: 1, borderRadius: "4px", background: i === index ? "#7a3a6a" : "#7a3a6a33", cursor: "pointer", transition: "background 0.3s" }}
-                                />
-                            ))}
-                        </div>
-                    )}
-                    {loading ? (
-                        <div style={{ textAlign: "center", padding: "20px", color: "var(--text-muted)" }}>Chargement...</div>
-                    ) : current ? (
-                        <>
-                            <div style={{ display: "flex", gap: "14px", alignItems: "center" }}>
-                                <div style={{ position: "relative", flexShrink: 0 }}>
-                                    <div style={{ width: "72px", height: "72px", borderRadius: "50%", overflow: "hidden", background: "rgba(122,58,106,0.12)", border: "2px solid #7a3a6a33", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                        {current.imageUrl
-                                            ? <img src={current.imageUrl} alt={current.nom} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center" }} />
-                                            : <span style={{ fontSize: "2rem" }}>{current.emoji}</span>
-                                        }
-                                    </div>
-                                    <div style={{ position: "absolute", bottom: -4, right: -4, background: "white", borderRadius: "50%", width: "24px", height: "24px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.85rem", boxShadow: "0 2px 6px rgba(0,0,0,0.12)" }}>
-                                        {current.emoji}
-                                    </div>
+        <Card title={`Ils sont nés un ${jour} ${mois}`} emoji="🎂" bgColor="#f0d8ec" accent="#7a3a6a">
+
+            {/* ── NAVIGATION ── */}
+            {personnes.length > 1 && (
+                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
+
+                    {/* Flèche gauche */}
+                    <button onClick={goPrev} style={{
+                        width: "34px", height: "34px", borderRadius: "50%",
+                        border: "1.5px solid #7a3a6a44", background: "rgba(255,255,255,0.7)",
+                        cursor: "pointer", fontSize: "16px", display: "flex",
+                        alignItems: "center", justifyContent: "center", flexShrink: 0,
+                        color: "#7a3a6a", transition: "background 0.2s",
+                    }}>‹</button>
+
+                    {/* Dots centrés */}
+                    <div style={{ display: "flex", gap: "6px", flex: 1, justifyContent: "center" }}>
+                        {personnes.map((_, i) => (
+                            <button key={i} onClick={() => goTo(i)} style={{
+                                width: i === index ? "22px" : "10px",
+                                height: "10px", borderRadius: "20px",
+                                background: i === index ? "#7a3a6a" : "#7a3a6a33",
+                                border: "none", cursor: "pointer", padding: 0,
+                                transition: "all 0.3s ease",
+                            }} />
+                        ))}
+                    </div>
+
+                    {/* Flèche droite */}
+                    <button onClick={goNext} style={{
+                        width: "34px", height: "34px", borderRadius: "50%",
+                        border: "1.5px solid #7a3a6a44", background: "rgba(255,255,255,0.7)",
+                        cursor: "pointer", fontSize: "16px", display: "flex",
+                        alignItems: "center", justifyContent: "center", flexShrink: 0,
+                        color: "#7a3a6a", transition: "background 0.2s",
+                    }}>›</button>
+
+                </div>
+            )}
+
+            {/* ── CONTENU avec swipe ── */}
+            <div
+                onTouchStart={e => setTouchStartX(e.touches[0].clientX)}
+                onTouchEnd={e => {
+                    if (touchStartX === null) return
+                    const diff = touchStartX - e.changedTouches[0].clientX
+                    if (Math.abs(diff) > 40) diff > 0 ? goNext() : goPrev()
+                    setTouchStartX(null)
+                }}
+            >
+                {loading ? (
+                    <div style={{ textAlign: "center", padding: "20px", color: "var(--text-muted)" }}>Chargement...</div>
+                ) : current ? (
+                    <>
+                        <div style={{ display: "flex", gap: "14px", alignItems: "center" }}>
+                            <div style={{ position: "relative", flexShrink: 0 }}>
+                                <div style={{ width: "72px", height: "72px", borderRadius: "50%", overflow: "hidden", background: "rgba(122,58,106,0.12)", border: "2px solid #7a3a6a33", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                    {current.imageUrl
+                                        ? <img src={current.imageUrl} alt={current.nom} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center" }} />
+                                        : <span style={{ fontSize: "2rem" }}>{current.emoji}</span>
+                                    }
                                 </div>
-                                <div style={{ flex: 1 }}>
-                                    <p style={{ fontSize: "1rem", fontWeight: 700, fontFamily: "var(--font-jost)", color: "var(--text-dark)", marginBottom: "4px", lineHeight: 1.2 }}>{current.nom}</p>
-                                    <p style={{ fontSize: "0.78rem", color: "var(--text-muted)", marginBottom: "6px" }}>{current.description}</p>
-                                    <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-                                        <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "#7a3a6a" }}>🎂 {current.annee}</span>
-                                        <span style={{ fontSize: "0.72rem", color: "var(--text-muted)", background: "rgba(122,58,106,0.08)", padding: "2px 8px", borderRadius: "20px" }}>{current.age} ans</span>
-                                    </div>
+                                <div style={{ position: "absolute", bottom: -4, right: -4, background: "white", borderRadius: "50%", width: "24px", height: "24px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.85rem", boxShadow: "0 2px 6px rgba(0,0,0,0.12)" }}>
+                                    {current.emoji}
                                 </div>
                             </div>
-                            {current.extrait && (
-                                <p style={{ fontSize: "0.82rem", lineHeight: 1.7, color: "var(--text-muted)", marginTop: "14px", borderLeft: "3px solid #7a3a6a33", paddingLeft: "12px", display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical" as const, overflow: "hidden" }}>
-                                    {current.extrait}
-                                </p>
-                            )}
-                        </>
-                    ) : (
-                        <p style={{ color: "var(--text-muted)", textAlign: "center" }}>Aucune naissance trouvée.</p>
-                    )}
-                </Card>
+                            <div style={{ flex: 1 }}>
+                                <p style={{ fontSize: "1rem", fontWeight: 700, fontFamily: "var(--font-jost)", color: "var(--text-dark)", marginBottom: "4px", lineHeight: 1.2 }}>{current.nom}</p>
+                                <p style={{ fontSize: "0.78rem", color: "var(--text-muted)", marginBottom: "6px" }}>{current.description}</p>
+                                <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+                                    <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "#7a3a6a" }}>🎂 {current.annee}</span>
+                                    <span style={{ fontSize: "0.72rem", color: "var(--text-muted)", background: "rgba(122,58,106,0.08)", padding: "2px 8px", borderRadius: "20px" }}>{current.age} ans</span>
+                                </div>
+                            </div>
+                        </div>
+                        {current.extrait && (
+                            <p style={{ fontSize: "0.82rem", lineHeight: 1.7, color: "var(--text-muted)", marginTop: "14px", borderLeft: "3px solid #7a3a6a33", paddingLeft: "12px", display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical" as const, overflow: "visible" }}>
+                                {current.extrait}
+                            </p>
+                        )}
+                    </>
+                ) : (
+                    <p style={{ color: "var(--text-muted)", textAlign: "center" }}>Aucune naissance trouvée.</p>
+                )}
             </div>
-        </div>
+        </Card>
     )
 }

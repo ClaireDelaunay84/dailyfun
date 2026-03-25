@@ -6,46 +6,83 @@ import { getJourneesduJour } from "../data/journeesInternationales"
 export default function JourneeCard() {
     const journees = getJourneesduJour()
     const [index, setIndex] = useState(0)
-    const [flipped, setFlipped] = useState(false)
+    const [fading, setFading] = useState(false)
+    const [touchStartX, setTouchStartX] = useState<number | null>(null)
 
     useEffect(() => {
         if (journees.length <= 1) return
         const interval = setInterval(() => {
-            setFlipped(true)
-            setTimeout(() => { setIndex(i => (i + 1) % journees.length); setFlipped(false) }, 600)
+            setIndex(i => (i + 1) % journees.length)
         }, 20000)
         return () => clearInterval(interval)
     }, [journees.length])
 
+    const goTo = (i: number) => {
+        setFading(true)
+        setTimeout(() => { setIndex(i); setFading(false) }, 300)
+    }
+    const goPrev = () => goTo((index - 1 + journees.length) % journees.length)
+    const goNext = () => goTo((index + 1) % journees.length)
+
     const current = journees[index]
 
     return (
-        <div style={{ perspective: "1200px", height: "100%", display: "flex", flexDirection: "column" }}>
-            <div style={{
-                transition: "transform 0.6s ease",
-                transformStyle: "preserve-3d",
-                transform: flipped ? "rotateX(90deg)" : "rotateX(0deg)",
-                transformOrigin: "center center",
-                flex: 1, display: "flex", flexDirection: "column",
-            }}>
-                <Card title="Journée internationale" emoji="🌍" bgColor="#d0e8f8" accent="#2d5a7a">
-                    {journees.length > 1 && (
-                        <div style={{ display: "flex", gap: "6px", marginBottom: "16px" }}>
-                            {journees.map((_, i) => (
-                                <div key={i} onClick={() => { setFlipped(true); setTimeout(() => { setIndex(i); setFlipped(false) }, 600) }}
-                                     style={{ height: "3px", flex: 1, borderRadius: "4px", background: i === index ? "#2d5a7a" : "#2d5a7a33", cursor: "pointer", transition: "background 0.3s" }}
-                                />
-                            ))}
-                        </div>
-                    )}
-                    <p style={{ fontSize: "1.2rem", fontWeight: 700, fontFamily: "var(--font-jost)", lineHeight: 1.3, marginBottom: "12px", color: "var(--text-dark)" }}>
-                        {current.nom}
-                    </p>
-                    <p style={{ fontSize: "0.9rem", lineHeight: 1.7, color: "var(--text-muted)", borderLeft: "3px solid #2d5a7a33", paddingLeft: "12px" }}>
-                        {current.description}
-                    </p>
-                </Card>
+        <Card title="Journée internationale" emoji="🌍" bgColor="#d0e8f8" accent="#2d5a7a">
+
+            {/* ── NAVIGATION ── */}
+            {journees.length > 1 && (
+                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
+
+                    <button onClick={goPrev} style={{
+                        width: "34px", height: "34px", borderRadius: "50%",
+                        border: "1.5px solid #2d5a7a44", background: "rgba(255,255,255,0.7)",
+                        cursor: "pointer", fontSize: "16px", display: "flex",
+                        alignItems: "center", justifyContent: "center", flexShrink: 0,
+                        color: "#2d5a7a", transition: "background 0.2s",
+                    }}>‹</button>
+
+                    <div style={{ display: "flex", gap: "6px", flex: 1, justifyContent: "center" }}>
+                        {journees.map((_, i) => (
+                            <button key={i} onClick={() => goTo(i)} style={{
+                                width: i === index ? "22px" : "10px",
+                                height: "10px", borderRadius: "20px",
+                                background: i === index ? "#2d5a7a" : "#2d5a7a33",
+                                border: "none", cursor: "pointer", padding: 0,
+                                transition: "all 0.3s ease",
+                            }} />
+                        ))}
+                    </div>
+
+                    <button onClick={goNext} style={{
+                        width: "34px", height: "34px", borderRadius: "50%",
+                        border: "1.5px solid #2d5a7a44", background: "rgba(255,255,255,0.7)",
+                        cursor: "pointer", fontSize: "16px", display: "flex",
+                        alignItems: "center", justifyContent: "center", flexShrink: 0,
+                        color: "#2d5a7a", transition: "background 0.2s",
+                    }}>›</button>
+
+                </div>
+            )}
+
+            {/* ── CONTENU avec swipe ── */}
+            <div
+                onTouchStart={e => setTouchStartX(e.touches[0].clientX)}
+                onTouchEnd={e => {
+                    if (touchStartX === null) return
+                    const diff = touchStartX - e.changedTouches[0].clientX
+                    if (Math.abs(diff) > 40) diff > 0 ? goNext() : goPrev()
+                    setTouchStartX(null)
+                }}
+                style={{ opacity: fading ? 0 : 1, transition: "opacity 0.3s ease", display: "flex", flexDirection: "column", gap: "12px" }}
+            >
+                <p style={{ fontFamily: "var(--font-licorice)", fontSize: "2.4rem", color: "#2d5a7a", lineHeight: 1.2 }}>
+                    {current.nom}
+                </p>
+                <p style={{ fontSize: "0.95rem", lineHeight: 1.75, color: "var(--text-muted)", borderLeft: "3px solid #2d5a7a33", paddingLeft: "14px" }}>
+                    {current.description}
+                </p>
             </div>
-        </div>
+
+        </Card>
     )
 }

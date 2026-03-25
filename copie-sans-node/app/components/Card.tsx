@@ -2,54 +2,48 @@
 
 type CardProps = {
     title: string
-    emoji: React.ReactNode
+    emoji: string
     children: React.ReactNode
     accent?: string
     bgColor?: string
 }
 
 export default function Card({
-                                 title,
-                                 emoji,
-                                 children,
-                                 accent = "#3d8a78",
-                                 bgColor = "#c8ece6",
-                             }: CardProps) {
+    title, emoji, children,
+    accent = "#3d8a78",
+    bgColor = "#c8ece6",
+}: CardProps) {
     return (
         <div style={{
             borderRadius: "22px",
             overflow: "hidden",
             display: "flex",
             flexDirection: "column",
-            height: "100%",
             background: bgColor,
             border: `0.5px solid ${accent}22`,
         }}>
-            {/* ── HEADER ── */}
+            {/* HEADER */}
             <div style={{
-                padding: "12px 16px 10px",
+                padding: "14px 20px 12px",
                 display: "flex",
                 alignItems: "center",
-                gap: "10px",
+                gap: "12px",
                 borderBottom: `0.5px solid ${accent}18`,
             }}>
                 <div style={{
-                    width: "34px",
-                    height: "34px",
-                    borderRadius: "10px",
-                    background: "rgba(255,255,255,0.6)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "17px",
-                    flexShrink: 0,
+                    width: "38px", height: "38px",
+                    borderRadius: "12px",
+                    background: "rgba(255,255,255,0.65)",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    fontSize: "20px", flexShrink: 0,
+                    boxShadow: "0 1px 4px rgba(0,0,0,0.06)",
                 }}>
                     {emoji}
                 </div>
                 <p style={{
                     color: accent,
-                    fontSize: "0.6rem",
-                    letterSpacing: "2px",
+                    fontSize: "0.58rem",
+                    letterSpacing: "2.5px",
                     textTransform: "uppercase",
                     fontWeight: 700,
                     margin: 0,
@@ -59,13 +53,12 @@ export default function Card({
                 </p>
             </div>
 
-            {/* ── CONTENU ── */}
+            {/* CONTENT */}
             <div style={{
-                padding: "16px 18px",
+                padding: "20px 24px",
                 color: "var(--text-dark)",
                 lineHeight: 1.6,
-                flex: 1,
-                background: "rgba(255,255,255,0.45)",
+                background: "rgba(255,255,255,0.4)",
             }}>
                 {children}
             </div>
