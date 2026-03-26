@@ -345,32 +345,74 @@ export const journeesA: Record<string, JourneeInternationale[]> = {
         { nom: "Journée mondiale de l'odeur des livres (Bibliophile Day)", description: "L'odeur des vieux livres a un nom scientifique : bibliomie. Elle est causée par la décomposition du papier. 79% des lecteurs affirment que l'odeur d'un livre est aussi importante que le texte lui-même !" },
     ],
     "03-26": [
-        { nom: "Journée nationale du poulpe", description: "Les poulpes ont 3 cœurs, 9 cerveaux et peuvent changer de couleur en 0,3 secondes. Ils utilisent des outils, résolvent des labyrinthes et reconnaissent des visages humains. Le QI animal le plus sous-estimé de l'océan !" },
-        { nom: "Journée mondiale du mime", description: "Marcel Marceau, le plus grand mime du monde, n'a prononcé qu'une seule parole dans un film : 'Non !' dans un film de Mel Brooks. L'art du silence est tout un programme !" },
+        {
+            nom: "Journée des épinard",
+            description: "Il y a 3 fois plus de fer dans les gaufrettes au chocolat que dans les épinards"
+        },
+        {
+            nom: "Hier c'était la journée de la procrastination !",
+            description: "Donc si vous l'avez remise à aujourd'hui, proftez-en, c'est encore libre...!"
+        },
     ],
     "03-27": [
-        { nom: "Journée mondiale du théâtre", description: "Le théâtre est né il y a 2 500 ans en Grèce. Les masques permettaient aux acteurs de jouer plusieurs rôles. Les deux emojis 🎭 représentent encore les masques de la comédie et de la tragédie grecs !" },
-        { nom: "Journée nationale du jeu de cache-cache", description: "Le cache-cache est le jeu universel joué dans toutes les cultures du monde. Des études montrent qu'il développe la théorie de l'esprit chez les enfants — la capacité à comprendre que les autres ont des pensées différentes !" },
+        {
+            nom: "Journée mondiale du théâtre",
+            description: "Assister à une représentation au festival d'Avignon coûte 2,2 fois moins cher qu'une place pour un match de Ligue 1"
+        },
+        {
+            nom: "Journée nationale du fromage",
+            description: "Un Français consomme en moyenne 27 kg de fromage par an — soit 2,5 fois plus que la moyenne mondiale, faisant de la France le 1er pays consommateur per capita au monde. 🥇🇫🇷"
+        },
     ],
     "03-28": [
-        { nom: "Journée mondiale des infirmières (anticipation)", description: "28 millions d'infirmières et infirmiers dans le monde forment la plus grande profession de santé. Florence Nightingale réduisit la mortalité hospitalière de 42% à 2% simplement en imposant l'hygiène des mains !" },
-        { nom: "Journée nationale du piano", description: "Le piano fut inventé en 1700 par Bartolomeo Cristofori à Florence. Il a 88 touches et environ 12 000 pièces mécaniques. Un accord de piano peut résonner jusqu'à 30 secondes dans une salle silencieuse !" },
+        {
+            nom: "Journée des mauvaises herbes",
+            description: "Le pissenlit que vous arrachez de votre jardin contient 3 fois plus de vitamine C qu'une laitue achetée en supermarché — et plus de calcium que le lait. 🥛❌ Ce qu'on appelle mauvaise herbe n'existe pas en botanique : c'est purement une invention humaine. 🧑‍🌾"
+        },
+        {
+            nom: "Journée mondiale du Big Bang",
+            description: "Le terme Big Bang a été inventé en 1949 par un scientifique qui n'y croyait pas — Fred Hoyle l'a utilisé à la radio britannique pour se moquer de la théorie. 😂 Le nom est resté, mais pas lui : il a eu le prix Nobel... pour une autre découverte. 🏆"
+        },
     ],
     "03-29": [
-        { nom: "Journée nationale des fiches bristol", description: "Les fiches bristol ont révolutionné l'organisation intellectuelle au XVIIIe siècle. Carl Linné classait toutes ses espèces sur des fiches. Le système Zettelkasten des universitaires allemands est devenu une méthode de productivité culte !" },
-        { nom: "Journée mondiale du café au lait d'avoine", description: "Le lait d'avoine fut inventé par le chercheur Rickard Öste en 1990 en Suède. Le lait d'avoine produit 80% moins de CO2 que le lait de vache et utilise 10 fois moins d'eau. La tendance du siècle !" },
+        {
+            nom: "Journée internationale des nuages",
+            description: "Il existe officiellement 102 types de nuages répertoriés par l'Organisation Météorologique Mondiale — et le dernier, l'\"asperitas\", n'a été ajouté à la liste qu'en 2017, après une campagne menée par... un club de passionnés de nuages britanniques. 🇬🇧🔭"
+        },
+        {
+            nom: "Journée du tour de passe-passe",
+            description: "Harry Houdini était si célèbre que son nom est entré dans le dictionnaire anglais — \"to houdini\" signifie s'échapper d'une situation impossible — et il réalisait ses tours les plus dangereux avec une côte cassée, sans jamais le dire au public. 🪄🤫"
+        },
     ],
     "03-30": [
-        { nom: "Journée mondiale des jeux de mots", description: "Les calembours et jeux de mots activent les deux hémisphères du cerveau simultanément. Shakespeare a glissé plus de 3 000 jeux de mots dans ses œuvres. Le plus vieux jeu de mots connu date de 1900 avant J.-C. en Babylonie !" },
-        { nom: "Journée nationale de la tarte", description: "La tarte est l'un des plus anciens plats cuits — les Égyptiens faisaient déjà des tartes. La tarte Tatin fut inventée par accident par les sœurs Tatin qui retournèrent leur tarte brûlée. Un raté devenu classique !" },
+        {
+            nom: "Journée Mondiale des troubles bipolaires",
+            description: "La journée mondiale des troubles bipolaires est célébrée le 30 mars, jour de naissance de Vincent van Gogh — artiste dont le diagnostic posthume de trouble bipolaire est aujourd'hui reconnu par la majorité des psychiatres, et qui a peint 900 tableaux en seulement 10 ans. 🎨"
+        },
+        {
+            nom: "Journée des médecins",
+            description: "Le caducée, symbole universel de la médecine, est en réalité une erreur historique — le bâton ailé aux deux serpents est le symbole d'Hermès, dieu des marchands et des voleurs, alors que le vrai symbole médical est le bâton d'Asclépios, avec un seul serpent. 🐍"
+        },
     ],
     "03-31": [
-        { nom: "Journée mondiale de la sauvegarde (Backup Day)", description: "31 mars : la veille du 1er avril, le meilleur moment pour sauvegarder ses données ! 30% des personnes n'ont jamais sauvegardé leurs données. La règle 3-2-1 : 3 copies, sur 2 supports différents, dont 1 hors site !" },
-        { nom: "Journée nationale de la crème glacée au chocolat", description: "La crème glacée au chocolat est la 2e saveur préférée au monde après la vanille. La première mention de crème glacée en France date de 1686 au café Procope à Paris — toujours ouvert aujourd'hui !" },
+        {
+            nom: "Journée Internationale de la visibilité Trans",
+            description: "La journée de la visibilité trans existe depuis 2009 seulement, fondée par l'activiste Rachel Crandall — alors que les Hijras, communauté trans d'Inde, sont officiellement reconnues par l'État indien depuis plus de 4 000 ans, ce qui en fait l'une des plus anciennes reconnaissances institutionnelles au monde. 🌏"
+        },
+        {
+            nom: "Journée Mondiale de la sauvegarde des données informatiques",
+            description: "La journée mondiale de la sauvegarde des données est célébrée le 31 mars — la veille du 1er avril — car ses fondateurs estimaient qu'il fallait être un sacré idiot pour perdre toutes ses données le lendemain. 😂 Et pourtant, 30% des gens n'ont jamais fait de sauvegarde de leur vie."
+        },
     ],
     "04-01": [
-        { nom: "Poisson d'avril !", description: "La tradition viendrait du passage au calendrier grégorien en 1564 : les retardataires qui fêtaient le Nouvel An en avril se faisaient taquiner. En Écosse, ça dure deux jours — le 2e s'appelle 'Taily Day' et concerne le dos !" },
-        { nom: "Journée mondiale des oiseaux migrateurs", description: "50 milliards d'oiseaux migrent chaque année. Le Courlis corlieu parcourt 30 000 km par an. Les oiseaux utilisent le champ magnétique terrestre, les étoiles et les odeurs pour se repérer. Un GPS biologique parfait !" },
+        {
+            nom: "1er avril",
+            description: "Le \"poisson d'avril\" vient du XVIe siècle — quand le roi Charles IX décala le Nouvel An du 1er avril au 1er janvier, les gens qui n'étaient pas au courant continuaient d'offrir des cadeaux en avril et se faisaient coller un poisson dans le dos pour se moquer d'eux. 😂"
+        },
+        {
+            nom: "Journée Internationale de la blague",
+            description: "En 1957, la BBC diffusa un documentaire sérieux sur la récolte des spaghettis dans les arbres en Suisse — des milliers de téléspectateurs appelèrent la chaîne pour demander où acheter un plant de spaghetti, ce qui reste à ce jour le canular télévisé le plus célèbre de l'histoire. 🌳🍝"
+        },
     ],
     "04-02": [
         { nom: "Journée mondiale de la sensibilisation à l'autisme", description: "1 personne sur 100 est autiste. Des études montrent que les personnes autistes ont souvent des capacités extraordinaires dans certains domaines. La neurodiversité enrichit l'humanité — chaque cerveau est une façon unique de voir le monde !" },
