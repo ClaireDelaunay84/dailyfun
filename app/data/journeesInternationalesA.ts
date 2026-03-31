@@ -485,8 +485,14 @@ export const journeesA: Record<string, JourneeInternationale[]> = {
         },
     ],
     "04-09": [
-        { nom: "Journée mondiale des aidants", description: "En France, 11 millions de personnes aident régulièrement un proche malade ou handicapé. Ces aidants invisibles représentent une valeur économique de 164 milliards d'euros par an — et le font par amour, pas pour l'argent !" },
-        { nom: "Journée mondiale de la gentillesse entre étrangers", description: "Une étude de l'Université de Chicago a prouvé que parler à un inconnu dans les transports rend plus heureux qu'être seul... même pour les introvertis ! Nos cerveaux sont câblés pour la connexion sociale !" },
+        {
+            nom: "Journée des objets connectés",
+            description: ""
+        },
+        {
+            nom: "Journée mondiale de la licorne",
+            description: ""
+        },
     ],
     "04-10": [
         { nom: "Journée internationale des frères et sœurs", description: "Les liens fraternels sont statistiquement les plus longs de notre vie — plus longs que ceux avec nos parents ou nos enfants. Les frères et sœurs développent des capacités sociales supérieures. Appelez le vôtre aujourd'hui !" },
