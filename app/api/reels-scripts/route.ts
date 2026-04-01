@@ -79,14 +79,19 @@ function genQA(date: Date): ReelScript {
     const data = saviezVous[key] ?? { emoji: "❓", texte: "Chaque jour recèle une curiosité !" }
     const { corps, punchline } = splitTexte(data.texte)
 
-    // Corps sert de mise en contexte, punchline = réponse
+    // Transforme la 1ère phrase en vraie question
+    const question = corps
+        .replace(/^(Le |La |Les |Un |Une |Des )/, "")
+        .replace(/\.$/, "")
+    const accroche = `${data.emoji} ${question.charAt(0).toUpperCase() + question.slice(1)} — vrai ou faux ?`
+
     return {
         date: formatDateFr(date),
         format: "qa",
-        accroche: `${data.emoji} TU AURAIS RÉPONDU QUOI ?`,
-        corps: `⏳ ${corps}`,
+        accroche,
+        corps: "👇 Laisse ta réponse en commentaire !",
         punchline: `✅ ${punchline}`,
-        cta: "💬 Commente ta réponse ! @dailyfun_fr",
+        cta: "➕ Suis @dailyfun_fr",
     }
 }
 
@@ -165,10 +170,10 @@ function scriptBlock(s: ReelScript): string {
             <span style="color:rgba(255,255,255,0.75);font-size:13px;">— ${label}</span>
         </div>
         <table style="width:100%;border-collapse:collapse;background:white;">
-            ${row("0 → 3 sec",  "ACCROCHE",  s.accroche)}
-            ${row("3 → 12 sec", "CORPS",     s.corps)}
-            ${row("12 → 17 sec","PUNCHLINE", s.punchline, true)}
-            ${row("17 → 20 sec","CTA",       s.cta)}
+            ${row("0 → 4 sec",  "ACCROCHE",  s.accroche)}
+            ${row("4 → 9 sec",  "CORPS",     s.corps)}
+            ${row("9 → 14 sec", "PUNCHLINE", s.punchline, true)}
+            ${row("14 → 18 sec","CTA",       s.cta)}
         </table>
     </div>`
 }
