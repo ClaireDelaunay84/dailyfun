@@ -40,22 +40,32 @@ type ReelScript = {
     corps: string
     punchline: string
     cta: string
+    storySoir: string  // ← AJOUTÉ
 }
 
 // ─── Découpage du texte en 2 parties ─────────────────────────────────────────
 
 function splitTexte(texte: string): { corps: string; punchline: string } {
-    // Coupe à la 1ère phrase complète (., !, ?)
     const match = texte.match(/^(.+?[.!?])\s+(.+)$/)
     if (match) {
         return { corps: match[1].trim(), punchline: match[2].trim() }
     }
-    // Fallback : coupe au milieu
     const mid = texte.lastIndexOf(" ", Math.floor(texte.length / 2))
     return {
         corps: texte.substring(0, mid).trim(),
         punchline: texte.substring(mid).trim(),
     }
+}
+
+// ─── Story du soir ────────────────────────────────────────────────────────────
+
+function genStorySoir(date: Date): string {
+    const tomorrow = new Date(date)
+    tomorrow.setDate(date.getDate() + 1)
+    const key = formatKey(tomorrow)
+    const data = saviezVous[key] ?? { emoji: "❓", texte: "Rendez-vous demain !" }
+    const { corps } = splitTexte(data.texte)
+    return `${data.emoji} "${corps}" — Vrai ou faux ?`
 }
 
 // ─── Générateurs par format ───────────────────────────────────────────────────
@@ -71,6 +81,7 @@ function genAnecdote(date: Date): ReelScript {
         corps,
         punchline,
         cta: "➕ Suis @dailyfun_fr",
+        storySoir: genStorySoir(date),  // ← AJOUTÉ
     }
 }
 
@@ -79,7 +90,6 @@ function genQA(date: Date): ReelScript {
     const data = saviezVous[key] ?? { emoji: "❓", texte: "Chaque jour recèle une curiosité !" }
     const { corps, punchline } = splitTexte(data.texte)
 
-    // Transforme la 1ère phrase en vraie question
     const question = corps
         .replace(/^(Le |La |Les |Un |Une |Des )/, "")
         .replace(/\.$/, "")
@@ -92,6 +102,7 @@ function genQA(date: Date): ReelScript {
         corps: "👇 Laisse ta réponse en commentaire !",
         punchline: `✅ ${punchline}`,
         cta: "➕ Suis @dailyfun_fr",
+        storySoir: genStorySoir(date),  // ← AJOUTÉ
     }
 }
 
@@ -109,13 +120,13 @@ function genJournee(date: Date): ReelScript {
         corps: j.description,
         punchline: j.nom,
         cta: "➕ Suis @dailyfun_fr",
+        storySoir: genStorySoir(date),  // ← AJOUTÉ
     }
 }
 
 // ─── Rotation des formats ─────────────────────────────────────────────────────
 
 function getFormat(dayOfWeek: number): "anecdote" | "qa" | "journee" {
-    // 1=Lun, 2=Mar, 3=Mer, 4=Jeu, 5=Ven, 6=Sam
     const map: Record<number, "anecdote" | "qa" | "journee"> = {
         1: "anecdote",
         2: "qa",
@@ -175,6 +186,11 @@ function scriptBlock(s: ReelScript): string {
             ${row("9 → 14 sec", "PUNCHLINE", s.punchline, true)}
             ${row("14 → 18 sec","CTA",       s.cta)}
         </table>
+        <div style="padding:14px 20px;background:#f0fdf4;border-top:2px dashed #bbf7d0;">
+            <div style="font-size:11px;font-weight:700;color:#16a34a;letter-spacing:1px;margin-bottom:6px;">🌙 STORY DU SOIR — Question mystère pour tes abonnés</div>
+            <div style="font-size:14px;color:#111827;">${s.storySoir}</div>
+            <div style="font-size:11px;color:#9ca3af;margin-top:4px;">→ Réponse demain matin dans le Reel</div>
+        </div>
     </div>`
 }
 
@@ -207,8 +223,6 @@ function buildEmail(scripts: ReelScript[], weekLabel: string): string {
 // ─── Route handler ────────────────────────────────────────────────────────────
 
 export async function GET(request: Request) {
-    // Sécurité : Vercel envoie Authorization: Bearer CRON_SECRET pour les cron jobs
-    // En mode manuel on peut passer ?token=CRON_SECRET
     const authHeader = request.headers.get("authorization")
     const { searchParams } = new URL(request.url)
     const tokenParam = searchParams.get("token")

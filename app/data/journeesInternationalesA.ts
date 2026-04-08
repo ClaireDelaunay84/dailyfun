@@ -532,20 +532,44 @@ export const journeesA: Record<string, JourneeInternationale[]> = {
             description: "Chaque 14 avril, la Corée du Sud célèbre la Black Day, la journée des célibataires ! Ceux qui n'ont rien reçu ni pour la Saint-Valentin ni pour la White Day se réunissent entre amis pour manger un grand bol de jajangmyeon, ces nouilles à la sauce noire qui sont devenues le symbole savoureux de cette journée 🍜🖤 Une façon conviviale et décomplexée de célébrer le célibat… avec humour et appétit ! 😄" },
     ],
     "04-15": [
-        { nom: "Journée mondiale de l'art — Léonard de Vinci Day", description: "Léonard de Vinci naquit le 15 avril 1452. Il remplissait des carnets de notes en écriture miroir. Sur ses 20 000 pages de notes, seulement 7 000 ont survécu. Les 13 000 pages perdues font encore rêver les historiens !" },
-        { nom: "Journée nationale de la coiffure", description: "Les humains se coiffent depuis 30 000 ans (peignes préhistoriques retrouvés). Marie-Antoinette portait des coiffures si hautes qu'elle ne pouvait pas monter en carrosse debout. La permanente fut inventée en 1906 !" },
+        { 
+            nom: "Journée mondiale de l'art — Léonard de Vinci Day", 
+            description: "🖼️ Le 15 avril, date de naissance de Léonard de Vinci en 1452, est célébrée comme la Journée Mondiale de l'Art pour honorer la créativité sous toutes ses formes — peinture, sculpture, musique, danse et bien plus encore ! " },
+        { 
+            nom: "Journée mondiale du cirque",
+            description: "🤹 La Journée Mondiale du Cirque célèbre cet art millénaire qui mêle acrobaties, jonglerie et magie pour émerveiller petits et grands sous le chapiteau ! 🎠✨" },
     ],
     "04-16": [
-        { nom: "Journée mondiale de la voix", description: "La voix humaine est l'instrument le plus complexe qui existe. Chaque personne a une voix unique comme ses empreintes digitales. Les chanteurs d'opéra peuvent atteindre 150 décibels — aussi fort qu'une perceuse pneumatique !" },
-        { nom: "Journée nationale des cerises", description: "La cerise est le fruit le plus rapide à manger : record du monde de crachage de noyau = 28,51 mètres ! Les cerisiers japonais (sakura) fleurissent seulement 2 semaines — d'où leur symbolisme de beauté éphémère au Japon !" },
+        {
+            nom: "Journée mondiale de la voix",
+            description: "🗣️ Chaque 16 avril, la Journée Mondiale de la Voix rappelle que notre voix est un instrument précieux et unique — qu'elle chante, raconte ou convainc, elle mérite qu'on en prenne soin ! 🎶" },
+        {
+            nom: "Journée mondiale contre l'esclavage des enfants",
+            description: "👶 La Journée Mondiale contre l'Esclavage des Enfants rappelle que des millions d'enfants sont encore exploités à travers le monde — une réalité inacceptable qui exige une mobilisation collective urgente. 🌍💔" },
+        {
+            nom: "Journée nationale des numismates",
+            description: "💰 La Journée Nationale des Numismates rend hommage aux passionnés de monnaies et médailles anciennes, ces collectionneurs qui preservent à travers chaque pièce un fragment d'histoire et de patrimoine ! 🏛️" },
     ],
     "04-17": [
-        { nom: "Journée mondiale de l'hémophilie", description: "L'hémophilie touche principalement les hommes : 1 sur 5 000. Elle était appelée 'maladie royale' car elle se propagea dans les familles royales européennes du XIXe siècle via la reine Victoria. La thérapie génique ouvre des espoirs de guérison !" },
-        { nom: "Journée nationale du caramel salé", description: "Le caramel au beurre salé breton a été inventé par Henri Le Roux en 1977 à Quiberon. La fleur de sel de Guérande lui donne son caractère unique. Le paradoxe sel-sucré crée une réaction cérébrale plus intense qu'avec le sucré seul !" },
+        {
+            nom: "Journée mondiale de l'hémophilie",
+            description: "💉 La Journée Mondiale de l'Hémophilie sensibilise aux troubles de la coagulation sanguine qui touchent des millions de personnes dans le monde, et appelle à un accès équitable aux traitements pour tous ! " },
+        {
+            nom: "Journée mondiale des luttes paysanes",
+            description: "🚜 La Journée Mondiale des Luttes Paysannes rend hommage aux agriculteurs du monde entier qui se battent pour leurs droits, leurs terres et une alimentation juste et durable pour tous ! ✊" },
+        {
+            nom: "Journée internationale de l'herboristerie",
+            description: "🌱 La Journée Mondiale de l'Herboristerie célèbre l'art ancestral des plantes médicinales et aromatiques — un savoir-faire millénaire qui, entre tradition et science moderne, continue de soigner et d'émerveiller ! 🍃" },
     ],
     "04-18": [
-        { nom: "Journée mondiale du patrimoine culturel", description: "L'UNESCO protège 1 154 sites dans 167 pays. Venise devrait être sous l'eau d'ici 2100 selon les projections climatiques. Des ingénieurs travaillent sur des barrières anti-inondation — une course contre la montre culturelle !" },
-        { nom: "Journée nationale de la pastèque", description: "La pastèque est composée à 92% d'eau — idéale pour s'hydrater ! Elle vient d'Afrique du Sud et est cultivée depuis 5 000 ans. Le Japon produit des pastèques carrées pour optimiser le stockage dans les réfrigérateurs !" },
+        {
+            nom: "Journée internationale des monuments et des sites",
+            description: "🗺️ Chaque 18 avril, la Journée Internationale des Monuments et des Sites nous invite à protéger et valoriser le patrimoine architectural et culturel de l'humanité — ces témoins irremplaçables de notre histoire commune ! "
+        },
+        {
+            nom: "Journée mondiale des radios amateurs",
+            description: "🔭 La Journée Mondiale des Radios Amateurs célèbre ces passionnés qui, micro en main et antenne pointée vers le ciel, connectent le monde entier sans frontières ni internet ! "
+        },
     ],
     "04-19": [
         { nom: "Journée mondiale de la créativité et de l'innovation", description: "La créativité est la compétence la plus recherchée par les employeurs du 21e siècle. Des études montrent que marcher augmente la créativité de 81%. Les meilleures idées viennent souvent... sous la douche !" },
