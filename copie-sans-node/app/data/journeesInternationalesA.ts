@@ -485,44 +485,91 @@ export const journeesA: Record<string, JourneeInternationale[]> = {
         },
     ],
     "04-09": [
-        { nom: "Journée mondiale des aidants", description: "En France, 11 millions de personnes aident régulièrement un proche malade ou handicapé. Ces aidants invisibles représentent une valeur économique de 164 milliards d'euros par an — et le font par amour, pas pour l'argent !" },
-        { nom: "Journée mondiale de la gentillesse entre étrangers", description: "Une étude de l'Université de Chicago a prouvé que parler à un inconnu dans les transports rend plus heureux qu'être seul... même pour les introvertis ! Nos cerveaux sont câblés pour la connexion sociale !" },
+        {
+            nom: "Journée des objets connectés",
+            description: "L'occasion de mettre en lumière toutes ces technologies du quotidien qui simplifient nos vies : montres intelligentes, enceintes connectées, capteurs, et bien plus encore. Une journée pour explorer, découvrir et s'émerveiller de l'univers de l'IoT (Internet of Things) 🌐✨"
+        },
+        {
+            nom: "Journée mondiale de la licorne",
+            description: "Cette créature magique et colorée est devenue bien plus qu'un mythe : elle symbolise la créativité, la singularité et la magie du possible ✨ Alors laissez parler votre imagination et embrassez votre côté unique… après tout, tout le monde a une licorne qui sommeille en soi 🌈💫"
+        },
     ],
     "04-10": [
-        { nom: "Journée internationale des frères et sœurs", description: "Les liens fraternels sont statistiquement les plus longs de notre vie — plus longs que ceux avec nos parents ou nos enfants. Les frères et sœurs développent des capacités sociales supérieures. Appelez le vôtre aujourd'hui !" },
-        { nom: "Journée nationale des frères Dolly (clonage)", description: "Dolly, la brebis clonée, naquit le 5 juillet 1996. Elle fut la première preuve qu'une cellule adulte peut être 'reprogrammée'. Depuis, 23 espèces animales ont été clonées. Le clonage humain reste officiellement interdit !" },
+        {
+            nom: "Journée internationale des frères et sœurs",
+            description: "Une belle occasion de célébrer ces liens uniques, faits de complicité, de souvenirs partagés… et parfois de quelques chamailleries 😄 Alors n'hésitez pas à envoyer un petit message à votre frère ou votre sœur pour leur dire combien ils comptent pour vous ❤️🤝" },
+        { nom:
+                "Journée du golfeur",
+            description: "Aujourd'hui, on rend hommage aux passionnés du green à l'occasion de la Journée du Golfeur ! Que vous soyez un pro du swing ou un débutant encore en quête de votre premier birdie, cette journée est faite pour vous 🏌️ Alors sortez vos clubs, profitez du grand air et savourez chaque coup… même ceux qui finissent dans le rough 😄🌿" },
     ],
     "04-11": [
-        { nom: "Journée mondiale de la maladie de Parkinson", description: "10 millions de personnes vivent avec Parkinson. Michael J. Fox a été diagnostiqué à 29 ans. Sa fondation a financé 2 milliards de recherche. Le tango argentin est reconnu comme thérapie officielle contre Parkinson !" },
-        { nom: "Journée nationale du pain au fromage", description: "Le pain au fromage existe sous mille formes dans le monde : khachapuri géorgien, gougère bourguignonne, pão de queijo brésilien. Le fromage dans le pain crée plus de 600 composés aromatiques lors de la cuisson !" },
+        {
+            nom: "Journée mondiale de la maladie de Parkinson",
+            description: "Aujourd'hui, le 11 avril, est dédié à la Journée Mondiale de la Maladie de Parkinson, symbolisée par la tulipe rouge 🔴 Cette journée est l'occasion de sensibiliser le grand public à cette maladie neurologique qui touche des millions de personnes dans le monde, et de soutenir les patients, leurs proches et les soignants qui les accompagnent au quotidien. Ensemble, continuons à soutenir la recherche pour un avenir sans Parkinson 💙" },
     ],
     "04-12": [
-        { nom: "Journée internationale du vol spatial habité", description: "Youri Gagarine orbita la Terre le 12 avril 1961 en 108 minutes. Il dit simplement : 'La Terre est bleue.' Depuis, 600 personnes ont quitté la Terre. La Station Spatiale Internationale orbite à 400 km d'altitude !" },
-        { nom: "Journée nationale de la limonade rose", description: "La limonade rose fut inventée par accident en 1857 quand un cirque mélangea de la limonade avec l'eau rougie de rinçage des chaussettes d'une performeuse. Le public adora. L'accident le plus savoureux de l'histoire !" },
+        {
+            nom: "Journée internationale du vol spatial habité",
+            description: "Aujourd'hui, on célèbre la Journée Internationale du Vol Spatial Habité ! Une date qui nous rappelle l'incroyable exploit de Youri Gagarine, premier homme à avoir voyagé dans l'espace le 12 avril 1961 🌍✨ L'occasion de lever les yeux vers les étoiles et de saluer tous ces astronautes qui repoussent les frontières de l'humanité, là où peu d'êtres humains ont osé aller 👨‍🚀🌌" },
+        {
+            nom: "Journée des enfants des rues",
+            description: "Aujourd'hui, la Journée des Enfants des Rues nous invite à ne pas détourner le regard sur une réalité qui touche des millions d'enfants à travers le monde, privés d'abri, d'éducation et de protection 💛 Cette journée est un appel collectif à l'action pour défendre leurs droits, soutenir les associations qui œuvrent à leurs côtés, et rappeler que chaque enfant mérite un avenir digne et sécurisé 🤝 Parce qu'aucun enfant ne devrait grandir sans filet 🧡" },
     ],
     "04-13": [
-        { nom: "Journée nationale du Scrabble", description: "Le Scrabble fut inventé en 1938 par Alfred Mosher Butts, un architecte au chômage. Il vendit les droits pour 150 dollars. Le jeu se vend aujourd'hui à 2 millions d'exemplaires par an. En français, le Z vaut 10 points !" },
-        { nom: "Journée mondiale de la pomme de terre", description: "La pomme de terre a sauvé l'Europe de la famine au XVIIIe siècle. Parmentier la fit planter à Versailles sous garde armée pour la rendre désirable. Les gens la volaient — le meilleur marketing culinaire de l'histoire !" },
+        {
+            nom: "Journée nationale du Scrabble",
+            description: "Ce jeu de lettres mythique qui fait travailler les méninges depuis des générations, où chaque mot posé sur le plateau peut faire basculer la partie 🧠✨ Alors sortez votre chevalet, piochez vos lettres et tentez de placer ce fameux mot sur une case mot compte triple… et que le meilleur vocabulaire gagne ! 🏆📖" },
+        {
+            nom: "Journée mondiale de la gastronomie",
+            description: "Une belle occasion de célébrer l'art de bien manger, de savourer des saveurs du monde entier et de rendre hommage à tous ceux qui transforment de simples ingrédients en véritables expériences culinaires 👨‍🍳✨ Que vous soyez cordon bleu ou simple gourmand, aujourd'hui plus que jamais, mettez les petits plats dans les grands… et régalez-vous 🌍🥂" },
     ],
     "04-14": [
-        { nom: "Journée mondiale du jeu de marelle", description: "La marelle est l'un des jeux les plus anciens — les Romains y jouaient dans les rues du Forum. Elle développe l'équilibre, la coordination et les mathématiques élémentaires. On la retrouve sur tous les continents !" },
-        { nom: "Journée nationale des tulipes", description: "Les tulipes viennent de Turquie, pas des Pays-Bas ! La 'tulipomanie' néerlandaise du XVIIe siècle fut la première bulle spéculative de l'histoire — un bulbe valait plus qu'une maison. La finance a toujours été créative !" },
+        {
+            nom: "Journée mondiale de la maladie de Chagas",
+            description: "La Journée Mondiale de la Maladie de Chagas met en lumière cette maladie tropicale silencieuse, causée par un parasite et qui affecte près de 7 millions de personnes dans le monde, principalement en Amérique latine 🌎 Souvent méconnue et négligée, elle peut pourtant avoir des conséquences graves sur le cœur et le système digestif si elle n'est pas dépistée à temps 💙 Une journée pour sensibiliser, agir et soutenir la recherche afin que Chagas ne reste plus dans l'ombre 🤝" },
+        {
+            nom: "Journée des célibataires (Corée du Sud)",
+            description: "Chaque 14 avril, la Corée du Sud célèbre la Black Day, la journée des célibataires ! Ceux qui n'ont rien reçu ni pour la Saint-Valentin ni pour la White Day se réunissent entre amis pour manger un grand bol de jajangmyeon, ces nouilles à la sauce noire qui sont devenues le symbole savoureux de cette journée 🍜🖤 Une façon conviviale et décomplexée de célébrer le célibat… avec humour et appétit ! 😄" },
     ],
     "04-15": [
-        { nom: "Journée mondiale de l'art — Léonard de Vinci Day", description: "Léonard de Vinci naquit le 15 avril 1452. Il remplissait des carnets de notes en écriture miroir. Sur ses 20 000 pages de notes, seulement 7 000 ont survécu. Les 13 000 pages perdues font encore rêver les historiens !" },
-        { nom: "Journée nationale de la coiffure", description: "Les humains se coiffent depuis 30 000 ans (peignes préhistoriques retrouvés). Marie-Antoinette portait des coiffures si hautes qu'elle ne pouvait pas monter en carrosse debout. La permanente fut inventée en 1906 !" },
+        { 
+            nom: "Journée mondiale de l'art — Léonard de Vinci Day", 
+            description: "🖼️ Le 15 avril, date de naissance de Léonard de Vinci en 1452, est célébrée comme la Journée Mondiale de l'Art pour honorer la créativité sous toutes ses formes — peinture, sculpture, musique, danse et bien plus encore ! " },
+        { 
+            nom: "Journée mondiale du cirque",
+            description: "🤹 La Journée Mondiale du Cirque célèbre cet art millénaire qui mêle acrobaties, jonglerie et magie pour émerveiller petits et grands sous le chapiteau ! 🎠✨" },
     ],
     "04-16": [
-        { nom: "Journée mondiale de la voix", description: "La voix humaine est l'instrument le plus complexe qui existe. Chaque personne a une voix unique comme ses empreintes digitales. Les chanteurs d'opéra peuvent atteindre 150 décibels — aussi fort qu'une perceuse pneumatique !" },
-        { nom: "Journée nationale des cerises", description: "La cerise est le fruit le plus rapide à manger : record du monde de crachage de noyau = 28,51 mètres ! Les cerisiers japonais (sakura) fleurissent seulement 2 semaines — d'où leur symbolisme de beauté éphémère au Japon !" },
+        {
+            nom: "Journée mondiale de la voix",
+            description: "🗣️ Chaque 16 avril, la Journée Mondiale de la Voix rappelle que notre voix est un instrument précieux et unique — qu'elle chante, raconte ou convainc, elle mérite qu'on en prenne soin ! 🎶" },
+        {
+            nom: "Journée mondiale contre l'esclavage des enfants",
+            description: "👶 La Journée Mondiale contre l'Esclavage des Enfants rappelle que des millions d'enfants sont encore exploités à travers le monde — une réalité inacceptable qui exige une mobilisation collective urgente. 🌍💔" },
+        {
+            nom: "Journée nationale des numismates",
+            description: "💰 La Journée Nationale des Numismates rend hommage aux passionnés de monnaies et médailles anciennes, ces collectionneurs qui preservent à travers chaque pièce un fragment d'histoire et de patrimoine ! 🏛️" },
     ],
     "04-17": [
-        { nom: "Journée mondiale de l'hémophilie", description: "L'hémophilie touche principalement les hommes : 1 sur 5 000. Elle était appelée 'maladie royale' car elle se propagea dans les familles royales européennes du XIXe siècle via la reine Victoria. La thérapie génique ouvre des espoirs de guérison !" },
-        { nom: "Journée nationale du caramel salé", description: "Le caramel au beurre salé breton a été inventé par Henri Le Roux en 1977 à Quiberon. La fleur de sel de Guérande lui donne son caractère unique. Le paradoxe sel-sucré crée une réaction cérébrale plus intense qu'avec le sucré seul !" },
+        {
+            nom: "Journée mondiale de l'hémophilie",
+            description: "💉 La Journée Mondiale de l'Hémophilie sensibilise aux troubles de la coagulation sanguine qui touchent des millions de personnes dans le monde, et appelle à un accès équitable aux traitements pour tous ! " },
+        {
+            nom: "Journée mondiale des luttes paysanes",
+            description: "🚜 La Journée Mondiale des Luttes Paysannes rend hommage aux agriculteurs du monde entier qui se battent pour leurs droits, leurs terres et une alimentation juste et durable pour tous ! ✊" },
+        {
+            nom: "Journée internationale de l'herboristerie",
+            description: "🌱 La Journée Mondiale de l'Herboristerie célèbre l'art ancestral des plantes médicinales et aromatiques — un savoir-faire millénaire qui, entre tradition et science moderne, continue de soigner et d'émerveiller ! 🍃" },
     ],
     "04-18": [
-        { nom: "Journée mondiale du patrimoine culturel", description: "L'UNESCO protège 1 154 sites dans 167 pays. Venise devrait être sous l'eau d'ici 2100 selon les projections climatiques. Des ingénieurs travaillent sur des barrières anti-inondation — une course contre la montre culturelle !" },
-        { nom: "Journée nationale de la pastèque", description: "La pastèque est composée à 92% d'eau — idéale pour s'hydrater ! Elle vient d'Afrique du Sud et est cultivée depuis 5 000 ans. Le Japon produit des pastèques carrées pour optimiser le stockage dans les réfrigérateurs !" },
+        {
+            nom: "Journée internationale des monuments et des sites",
+            description: "🗺️ Chaque 18 avril, la Journée Internationale des Monuments et des Sites nous invite à protéger et valoriser le patrimoine architectural et culturel de l'humanité — ces témoins irremplaçables de notre histoire commune ! "
+        },
+        {
+            nom: "Journée mondiale des radios amateurs",
+            description: "🔭 La Journée Mondiale des Radios Amateurs célèbre ces passionnés qui, micro en main et antenne pointée vers le ciel, connectent le monde entier sans frontières ni internet ! "
+        },
     ],
     "04-19": [
         { nom: "Journée mondiale de la créativité et de l'innovation", description: "La créativité est la compétence la plus recherchée par les employeurs du 21e siècle. Des études montrent que marcher augmente la créativité de 81%. Les meilleures idées viennent souvent... sous la douche !" },
