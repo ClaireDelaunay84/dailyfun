@@ -5,6 +5,28 @@ import { journeesInternationales } from "../../data/journeesInternationales"
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
+const TMDB_GENRES: Record<number, string> = {
+    28:    "Action",
+    12:    "Aventure",
+    16:    "Animation",
+    35:    "Comédie",
+    80:    "Crime",
+    99:    "Documentaire",
+    18:    "Drame",
+    10751: "Famille",
+    14:    "Fantastique",
+    36:    "Histoire",
+    27:    "Horreur",
+    10402: "Musique",
+    9648:  "Mystère",
+    10749: "Romance",
+    878:   "Science-Fiction",
+    10770: "Téléfilm",
+    53:    "Thriller",
+    10752: "Guerre",
+    37:    "Western",
+}
+
 // ─── Helpers dates ────────────────────────────────────────────────────────────
 
 function getNextMonday(): Date {
@@ -53,6 +75,7 @@ type FilmMeta = {
     acteurs: string[]
     affiche: string | null
     anecdote: string
+    genres: string[]
 }
 
 type JourneeIntl = {
@@ -165,7 +188,7 @@ async function genFilm(date: Date): Promise<ReelScript> {
     if (apiKey) {
         try {
             const annees = Array.from({ length: 55 }, (_, i) => 1970 + i)
-            let bestFilm: { id: number; title: string; popularity: number; release_date: string; poster_path: string | null } | null = null
+            let bestFilm: { id: number; title: string; popularity: number; release_date: string; poster_path: string | null; genre_ids: number[]} | null = null
 
             for (const annee of annees) {
                 const dateExacte = `${annee}-${MM}-${DD}`
@@ -200,6 +223,7 @@ async function genFilm(date: Date): Promise<ReelScript> {
                         ? `https://image.tmdb.org/t/p/w342${bestFilm.poster_path}`
                         : null,
                     anecdote,
+                    genres: ((bestFilm.genre_ids ?? []) as number[]).map((id: number) => TMDB_GENRES[id]).filter((g): g is string => Boolean(g)),
                 }
             }
         } catch {
@@ -281,6 +305,12 @@ function jourBlock(s: ReelScript, isJourneeIntlDay: boolean): string {
         ? `<div style="padding:12px 20px;background:#eff6ff;border-top:2px dashed #bfdbfe;">
             <div style="font-size:11px;font-weight:700;color:#1e40af;letter-spacing:1px;margin-bottom:8px;">🎬 CAPCUT — REEL 21h FILM</div>
             <table style="width:100%;border-collapse:collapse;font-size:12px;color:#374151;">
+                    ${(() => {
+                    const genresBadges = s.filmMeta?.genres?.map(g =>
+                        `<span style="font-size:11px;background:#1e3a5f22;color:#1e3a5f;padding:2px 10px;border-radius:20px;font-weight:600;margin-right:4px;">${g}</span>`
+                    ).join("") ?? ""
+                    return genresBadges ? `<tr><td colspan="2" style="padding:6px 0 10px;">${genresBadges}</td></tr>` : ""
+                })()}
                 <tr><td style="padding:3px 0;width:120px;color:#6b7280;font-weight:600;">🖼️ Fond</td><td>Affiche "<strong>${s.filmMeta?.titre ?? "le film"}</strong>" flouté — luminosité <strong>-65</strong> — fallback fond <strong>#0f172a</strong></td></tr>
                 <tr><td style="padding:3px 0;color:#6b7280;font-weight:600;">🔤 Typo</td><td>Poppins Bold — titre <strong>blanc grand</strong>, année + réal en <strong>doré #f5a623</strong></td></tr>
                 <tr><td style="padding:3px 0;color:#6b7280;font-weight:600;">✨ Effets</td><td>Accroche : slide-in gauche → Corps : fade in → Punchline : mot à mot → CTA : fade in</td></tr>
