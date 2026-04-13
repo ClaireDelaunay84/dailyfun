@@ -164,19 +164,19 @@ async function genFilm(date: Date): Promise<ReelScript> {
 
     if (apiKey) {
         try {
-            const decades = [1980, 1990, 2000, 2010, 2015, 2020]
-            let bestFilm: { id: number; title: string; revenue: number; release_date: string; poster_path: string | null } | null = null
+            const annees = Array.from({ length: 55 }, (_, i) => 1970 + i)
+            let bestFilm: { id: number; title: string; popularity: number; release_date: string; poster_path: string | null } | null = null
 
-            for (const decade of decades) {
-                const dateDebut = `${decade}-${MM}-${String(Math.max(1, parseInt(DD) - 10)).padStart(2, "0")}`
-                const dateFin   = `${decade + 9}-${MM}-${String(Math.min(28, parseInt(DD) + 10)).padStart(2, "0")}`
+            for (const annee of annees) {
+                const dateExacte = `${annee}-${MM}-${DD}`
                 const res = await fetch(
-                    `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=fr-FR&sort_by=revenue.desc&primary_release_date.gte=${dateDebut}&primary_release_date.lte=${dateFin}&page=1`,
+                    `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=fr-FR&sort_by=popularity.desc&primary_release_date.gte=${dateExacte}&primary_release_date.lte=${dateExacte}&page=1`,
                     { next: { revalidate: 86400 } }
                 )
                 const data = await res.json()
-                if (data.results?.[0] && (!bestFilm || data.results[0].revenue > bestFilm.revenue)) {
-                    bestFilm = data.results[0]
+                const film = data.results?.[0]
+                if (film && (!bestFilm || film.popularity > bestFilm.popularity)) {
+                    bestFilm = film
                 }
             }
 
