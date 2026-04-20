@@ -11,6 +11,7 @@ import SaviezVousCard from "./components/SaviezVousCard"
 import ArriveCard from "./components/ArriveCard"
 import NaissancesCard from "./components/NaissancesCard"
 import DecesCard from "./components/DecesCard"
+import FilmsCard from "./components/FilmsCard"
 
 const SECTIONS = [
     { id: "fete",       label: "Fête du jour",           emoji: "🎉", bg: "#c8ece6", accent: "#2d6a5e" },
@@ -23,6 +24,7 @@ const SECTIONS = [
     { id: "arrive",     label: "C'est arrivé",           emoji: "📅", bg: "#c8ece6", accent: "#2d6a5e" },
     { id: "naissance",  label: "Naissances",             emoji: "🎂", bg: "#f0d8ec", accent: "#7a3a6a" },
     { id: "deces",      label: "Décès",                  emoji: "🕯️", bg: "#d0dcea", accent: "#3a4a6a" },
+    { id: "films", label: "Films du jour", emoji: "🎬", bg: "#f0e8d8", accent: "#7a5a2a" },
 ]
 
 function CardForSection({ id }: { id: string }) {
@@ -37,6 +39,7 @@ function CardForSection({ id }: { id: string }) {
         case "arrive":      return <ArriveCard />
         case "naissance":   return <NaissancesCard />
         case "deces":       return <DecesCard />
+        case "films": return <FilmsCard />
         default:            return null
     }
 }

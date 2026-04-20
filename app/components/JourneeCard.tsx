@@ -27,44 +27,18 @@ export default function JourneeCard() {
     const current = journees[index]
 
     return (
-        <Card title="Journée internationale" emoji="🌍" bgColor="#d0e8f8" accent="#2d5a7a">
-
-            {/* ── NAVIGATION ── */}
+        <Card title="Journée internationale" bgColor="#D6CEC4" accent="#5C4430">
             {journees.length > 1 && (
                 <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
-
-                    <button onClick={goPrev} style={{
-                        width: "34px", height: "34px", borderRadius: "50%",
-                        border: "1.5px solid #2d5a7a44", background: "rgba(255,255,255,0.7)",
-                        cursor: "pointer", fontSize: "16px", display: "flex",
-                        alignItems: "center", justifyContent: "center", flexShrink: 0,
-                        color: "#2d5a7a", transition: "background 0.2s",
-                    }}>‹</button>
-
+                    <button onClick={goPrev} style={{ width: "34px", height: "34px", borderRadius: "50%", border: "1.5px solid #D9CCBA", background: "rgba(255,255,255,0.5)", cursor: "pointer", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, color: "#9E7F5C" }}>‹</button>
                     <div style={{ display: "flex", gap: "6px", flex: 1, justifyContent: "center" }}>
                         {journees.map((_, i) => (
-                            <button key={i} onClick={() => goTo(i)} style={{
-                                width: i === index ? "22px" : "10px",
-                                height: "10px", borderRadius: "20px",
-                                background: i === index ? "#2d5a7a" : "#2d5a7a33",
-                                border: "none", cursor: "pointer", padding: 0,
-                                transition: "all 0.3s ease",
-                            }} />
+                            <button key={i} onClick={() => goTo(i)} style={{ width: i === index ? "22px" : "10px", height: "10px", borderRadius: "20px", background: i === index ? "#9E7F5C" : "#9E7F5C33", border: "none", cursor: "pointer", padding: 0, transition: "all 0.3s ease" }} />
                         ))}
                     </div>
-
-                    <button onClick={goNext} style={{
-                        width: "34px", height: "34px", borderRadius: "50%",
-                        border: "1.5px solid #2d5a7a44", background: "rgba(255,255,255,0.7)",
-                        cursor: "pointer", fontSize: "16px", display: "flex",
-                        alignItems: "center", justifyContent: "center", flexShrink: 0,
-                        color: "#2d5a7a", transition: "background 0.2s",
-                    }}>›</button>
-
+                    <button onClick={goNext} style={{ width: "34px", height: "34px", borderRadius: "50%", border: "1.5px solid #D9CCBA", background: "rgba(255,255,255,0.5)", cursor: "pointer", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, color: "#9E7F5C" }}>›</button>
                 </div>
             )}
-
-            {/* ── CONTENU avec swipe ── */}
             <div
                 onTouchStart={e => setTouchStartX(e.touches[0].clientX)}
                 onTouchEnd={e => {
@@ -75,14 +49,13 @@ export default function JourneeCard() {
                 }}
                 style={{ opacity: fading ? 0 : 1, transition: "opacity 0.3s ease", display: "flex", flexDirection: "column", gap: "12px" }}
             >
-                <p style={{ fontFamily: "var(--font-licorice)", fontSize: "2.4rem", color: "#2d5a7a", lineHeight: 1.2 }}>
+                <p style={{ fontFamily: "var(--font-licorice)", fontSize: "2.4rem", color: "#5C4430", lineHeight: 1.2 }}>
                     {current.nom}
                 </p>
-                <p style={{ fontSize: "0.95rem", lineHeight: 1.75, color: "var(--text-muted)", borderLeft: "3px solid #2d5a7a33", paddingLeft: "14px" }}>
+                <p style={{ fontSize: "0.95rem", lineHeight: 1.75, color: "var(--text-muted)", borderLeft: "3px solid #C8B49A", paddingLeft: "14px" }}>
                     {current.description}
                 </p>
             </div>
-
         </Card>
     )
 }

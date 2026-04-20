@@ -44,7 +44,7 @@ export default function WeatherCard() {
     }, [])
 
     return (
-        <Card title="Météo du jour" emoji="⛅" bgColor="#dce8f4" accent="#2d4a6a">
+        <Card title="Météo du jour" bgColor="#DCCDC0" accent="#5C4430">
             {loading && <p style={{ color: "var(--text-muted)" }}>📍 Localisation en cours...</p>}
             {error && <p style={{ color: "var(--text-muted)" }}>⚠️ {error}</p>}
             {weather && (
@@ -52,15 +52,15 @@ export default function WeatherCard() {
                     <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
                         <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", flex: 1 }}>📍 {weather.city}</p>
                         {[`💨 ${weather.wind} km/h`, `💧 ${weather.humidity}%`].map(t => (
-                            <span key={t} style={{ background: "rgba(45,74,106,0.1)", borderRadius: "8px", padding: "3px 10px", fontSize: "0.78rem", color: "var(--text-muted)" }}>{t}</span>
+                            <span key={t} style={{ background: "rgba(92,68,48,0.08)", borderRadius: "8px", padding: "3px 10px", fontSize: "0.78rem", color: "var(--text-muted)" }}>{t}</span>
                         ))}
                     </div>
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}>
                         {[{ label: "Matin", data: weather.morning }, { label: "Après-midi", data: weather.afternoon }].map(({ label, data }) => (
-                            <div key={label} style={{ background: "rgba(45,74,106,0.07)", borderRadius: "16px", padding: "14px", textAlign: "center" }}>
+                            <div key={label} style={{ background: "rgba(92,68,48,0.06)", borderRadius: "16px", padding: "14px", textAlign: "center" }}>
                                 <p style={{ fontSize: "0.7rem", color: "var(--text-muted)", letterSpacing: "1px", textTransform: "uppercase", marginBottom: "6px" }}>{label}</p>
                                 <p style={{ fontSize: "2.5rem", margin: "0" }}>{data.icon}</p>
-                                <p style={{ fontFamily: "var(--font-licorice)", fontSize: "2.2rem", color: "#2d4a6a", lineHeight: 1 }}>{data.temp}°</p>
+                                <p style={{ fontFamily: "var(--font-licorice)", fontSize: "2.2rem", color: "#5C4430", lineHeight: 1 }}>{data.temp}°</p>
                                 <p style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginTop: "4px", textTransform: "capitalize" }}>{data.description}</p>
                             </div>
                         ))}

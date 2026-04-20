@@ -1,28 +1,34 @@
 @import "tailwindcss";
 
 :root {
-  --mint-dark:    #2d4a44;
-  --mint:         #3d8a78;
-  --mint-medium:  #5ab5a0;
-  --mint-light:   #a8d8d0;
-  --bg:           #f0faf8;
+    --bg:             #F0E8DA;
+    --bg-card:        #EAE0D0;
+    --bg-sand:        #E4D5BC;
+    --bg-taupe-rose:  #DCCDC0;
+    --bg-gris-beige:  #D6CEC4;
+    --bg-taupe-brun:  #C8B49A;
 
-  --text-dark:    #2d4a44;
-  --text-muted:   #6a8e88;
+    --sand-border:    #D9CCBA;
+    --taupe:          #9E7F5C;
+    --brown:          #5C4430;
+    --muted:          #9C8A76;
+    --cream:          #FAF7F2;
 
-  /* Jost via next/font */
-  --font-jost:    var(--font-jost-var, sans-serif);
+    --font-body:      var(--font-dm-sans, sans-serif);
+    --font-script:    'Mr De Haviland', cursive;
+    --font-licorice:  'Mr De Haviland', cursive;
+    --font-jost:      var(--font-dm-sans, sans-serif);
 
-  /* Licorice via CDN — utilisé directement en CSS */
-  --font-licorice: 'Licorice', cursive;
+    --text-dark:  #3A2E22;
+    --text-muted: #9C8A76;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-  background-color: var(--bg);
-  color: var(--text-dark);
-  font-family: var(--font-jost);
-  min-height: 100vh;
-  overflow-x: hidden;
+    background-color: var(--bg);
+    color: var(--text-dark);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    overflow-x: hidden;
 }
