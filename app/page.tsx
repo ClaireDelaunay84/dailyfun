@@ -79,6 +79,101 @@ function CardForSection({ id }: { id: string }) {
     }
 }
 
+function CalendrierWidget() {
+    const today = new Date()
+    const mois = today.toLocaleDateString("fr-FR", { month: "long" }).toUpperCase()
+    const jour = today.getDate()
+    const annee = today.getFullYear()
+    const moisIndex = today.getMonth()
+    const jourSemaine = today.getDay() // 0=dim
+
+    // Jours du mois
+    const premierJour = new Date(annee, moisIndex, 1).getDay()
+    const nbJours = new Date(annee, moisIndex + 1, 0).getDate()
+    const offset = premierJour === 0 ? 6 : premierJour - 1 // lundi en premier
+
+    const jours = ["L", "M", "M", "J", "V", "S", "D"]
+    const cases = Array(offset).fill(null).concat(Array.from({ length: nbJours }, (_, i) => i + 1))
+
+    return (
+        <div style={{
+            background: "rgba(220, 208, 190, 0.45)",
+            borderRadius: "18px",
+            padding: "16px 18px",
+            border: "1px solid rgba(217,204,186,0.4)",
+            boxShadow: "4px 5px 12px rgba(160,130,95,0.3)",
+            display: "flex",
+            gap: "16px",
+            alignItems: "flex-start",
+        }}>
+            {/* Gauche — mois + jour */}
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", minWidth: "64px" }}>
+                <span style={{
+                    fontFamily: "var(--font-body)",
+                    fontSize: "11px",
+                    fontWeight: 500,
+                    color: "#9E7F5C",
+                    letterSpacing: "2px",
+                    textTransform: "uppercase",
+                }}>{mois}</span>
+                <span style={{
+                    fontFamily: "'Mr De Haviland', cursive",
+                    fontSize: "72px",
+                    color: "#5C4430",
+                    lineHeight: 1,
+                    marginTop: "-4px",
+                }}>{jour}</span>
+            </div>
+
+            {/* Droite — mini calendrier */}
+            <div style={{ flex: 1 }}>
+                {/* En-tête jours */}
+                <div style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(7, 1fr)",
+                    marginBottom: "4px",
+                    gap: "1px",
+                }}>
+                    {jours.map((j, i) => (
+                        <span key={i} style={{
+                            fontSize: "8px",
+                            fontWeight: 500,
+                            color: "#9C8A76",
+                            textAlign: "center",
+                            letterSpacing: "0.5px",
+                        }}>{j}</span>
+                    ))}
+                </div>
+                {/* Cases */}
+                <div style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(7, 1fr)",
+                    gap: "1px",
+                }}>
+                    {cases.map((d, i) => (
+                        <span key={i} style={{
+                            fontSize: "9px",
+                            textAlign: "center",
+                            padding: "2px 0",
+                            borderRadius: "50%",
+                            background: d === jour ? "#9E7F5C" : "transparent",
+                            color: d === jour ? "#FAF7F2" : d ? "#5C4430" : "transparent",
+                            fontWeight: d === jour ? 600 : 400,
+                            lineHeight: "16px",
+                            width: "16px",
+                            height: "16px",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            margin: "0 auto",
+                        }}>{d ?? ""}</span>
+                    ))}
+                </div>
+            </div>
+        </div>
+    )
+}
+
 export default function Home() {
     const [active, setActive] = useState("fete")
     const [animating, setAnimating] = useState(false)
@@ -111,11 +206,10 @@ export default function Home() {
         <main className={styles.main}>
             <header className={styles.header}>
                 <div className={styles.headerLeft}>
-                    <span className={styles.headerLogo}>Dailyfun</span>
-                </div>
-                <div className={styles.headerCenter}>
-                    <span className={styles.headerDate}>{dateStr}</span>
-                    <span className={styles.headerTagline}>Ta dose quotidienne de culture</span>
+                    <div style={{display: "flex", flexDirection: "column", gap: "0px"}}>
+                        <span className={styles.headerLogo}>Dailyfun</span>
+                        <span className={styles.headerTagline}>Ta dose quotidienne de culture</span>
+                    </div>
                 </div>
                 <div className={styles.headerRight}>
                     <a href="https://www.buymeacoffee.com/dailyfun" target="_blank" className={styles.supportBtn}>
@@ -130,7 +224,7 @@ export default function Home() {
                     <p className={styles.sidebarTitle}>Rubriques du jour</p>
                     {SECTIONS.map(s => (
                         <div key={s.id} className={styles.sidebarItem}
-                             style={active === s.id ? { background: s.clay.bg + "55" } : {}}
+                             style={active === s.id ? {background: s.clay.bg + "55"} : {}}
                              onClick={() => switchTo(s.id)}>
                             <div className={styles.sidebarIcon} style={{
                                 background: s.clay.bg,
@@ -182,15 +276,8 @@ export default function Home() {
                     transition: "opacity 0.22s ease, transform 0.22s ease",
                     display: mobileOpen ? "none" : "flex",
                 }}>
-                    <div className={styles.mobileFeature} onClick={() => openMobile(SECTIONS[0].id)}>
-                        <div className={styles.mobileFeatureIconWrap} style={clayStyle(SECTIONS[0].clay, 52)}>
-                            <SectionIcon id={SECTIONS[0].id} color={SECTIONS[0].clay.icon} size={26} />
-                        </div>
-                        <div>
-                            <p className={styles.mobileFeatureCat}>À la une</p>
-                            <p className={styles.mobileFeatureTitle}>{SECTIONS[0].label}</p>
-                        </div>
-                    </div>
+                    <CalendrierWidget />
+
                     <div className={styles.mobileGrid}>
                         {SECTIONS.map(s => (
                             <div key={s.id} className={styles.mobileAppItem} onClick={() => openMobile(s.id)}>
@@ -211,21 +298,6 @@ export default function Home() {
                     }}>
                         <button className={styles.mobileBack} onClick={closeMobile}>‹ Retour</button>
                         <CardForSection id={mobileOpen} />
-                        <div className={styles.mobileQuickNav}>
-                            {otherMobile.map(s => (
-                                <div key={s.id} className={styles.mobileQuickItem}
-                                     style={{ background: s.clay.bg + "55" }}
-                                     onClick={() => {
-                                         setMobileAnimating(true)
-                                         setTimeout(() => { setMobileOpen(s.id); setMobileAnimating(false) }, 220)
-                                     }}>
-                                    <div style={clayStyle(s.clay, 28)}>
-                                        <SectionIcon id={s.id} color={s.clay.icon} size={14} />
-                                    </div>
-                                    <span style={{ color: "#5C4430", fontSize: "11px", fontWeight: 500 }}>{s.label}</span>
-                                </div>
-                            ))}
-                        </div>
                     </div>
                 )}
             </div>

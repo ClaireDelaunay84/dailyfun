@@ -70,7 +70,7 @@ export default function ArriveCard() {
                 >
                     <div style={{ width: "80px", height: "80px", borderRadius: "14px", flexShrink: 0, overflow: "hidden", background: "rgba(158,127,92,0.1)", border: "2px solid #D9CCBA", display: "flex", alignItems: "center", justifyContent: "center" }}>
                         {current.imageUrl
-                            ? <img src={current.imageUrl} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                            ? <img src={`/api/wiki-image?url=${encodeURIComponent(current.imageUrl!)}`} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                             : <span style={{ fontSize: "2.5rem" }}>📅</span>
                         }
                     </div>
