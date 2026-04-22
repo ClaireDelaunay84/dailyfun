@@ -316,6 +316,10 @@ export default function Home() {
                 <a href="/privacy" style={{color: "#9C8A76", textDecoration: "underline"}}>
                     Politique de confidentialité
                 </a>
+                <span style={{color: "#D9CCBA"}}>-</span>
+                <a href="/privacy/deletion" style={{color: "#9C8A76", textDecoration: "underline"}}>
+                    Suppression des données
+                </a>
             </footer>
         </main>
     )
