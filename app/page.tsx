@@ -230,10 +230,10 @@ export default function Home() {
                                 background: s.clay.bg,
                                 boxShadow: `3px 4px 8px ${s.clay.shadow}`,
                             }}>
-                                <SectionIcon id={s.id} color={s.clay.icon} size={18} />
+                                <SectionIcon id={s.id} color={s.clay.icon} size={18}/>
                             </div>
                             <span className={styles.sidebarLabel}
-                                  style={active === s.id ? { color: "#5C4430", fontWeight: 600 } : {}}>
+                                  style={active === s.id ? {color: "#5C4430", fontWeight: 600} : {}}>
                                 {s.label}
                             </span>
                         </div>
@@ -246,17 +246,17 @@ export default function Home() {
                             transform: animating ? "translateY(8px)" : "translateY(0)",
                             transition: "opacity 0.22s ease, transform 0.22s ease",
                         }}>
-                            <CardForSection id={active} />
+                            <CardForSection id={active}/>
                         </div>
                         <div>
                             <p className={styles.quickNavLabel}>Autres rubriques du jour</p>
                             <div className={styles.quickNav}>
                                 {quickSections.map(s => (
                                     <div key={s.id} className={styles.quickNavItem}
-                                         style={{ background: s.clay.bg + "44" }}
+                                         style={{background: s.clay.bg + "44"}}
                                          onClick={() => switchTo(s.id)}>
                                         <div className={styles.quickNavIcon} style={clayStyle(s.clay, 28)}>
-                                            <SectionIcon id={s.id} color={s.clay.icon} size={14} />
+                                            <SectionIcon id={s.id} color={s.clay.icon} size={14}/>
                                         </div>
                                         <span className={styles.quickNavText}>{s.label}</span>
                                     </div>
@@ -276,13 +276,13 @@ export default function Home() {
                     transition: "opacity 0.22s ease, transform 0.22s ease",
                     display: mobileOpen ? "none" : "flex",
                 }}>
-                    <CalendrierWidget />
+                    <CalendrierWidget/>
 
                     <div className={styles.mobileGrid}>
                         {SECTIONS.map(s => (
                             <div key={s.id} className={styles.mobileAppItem} onClick={() => openMobile(s.id)}>
                                 <div className={styles.mobileAppIcon} style={clayStyle(s.clay, 56)}>
-                                    <SectionIcon id={s.id} color={s.clay.icon} size={28} />
+                                    <SectionIcon id={s.id} color={s.clay.icon} size={28}/>
                                 </div>
                                 <span className={styles.mobileAppLabel}>{s.label}</span>
                             </div>
@@ -297,7 +297,7 @@ export default function Home() {
                         transition: "opacity 0.22s ease, transform 0.22s ease",
                     }}>
                         <button className={styles.mobileBack} onClick={closeMobile}>‹ Retour</button>
-                        <CardForSection id={mobileOpen} />
+                        <CardForSection id={mobileOpen}/>
                     </div>
                 )}
             </div>
@@ -307,6 +307,16 @@ export default function Home() {
                     ♡ Soutenir
                 </a>
             </div>
+            <footer style={{
+                textAlign: "center",
+                padding: "16px",
+                fontSize: "11px",
+                color: "#9C8A76",
+            }}>
+                <a href="/privacy" style={{color: "#9C8A76", textDecoration: "underline"}}>
+                    Politique de confidentialité
+                </a>
+            </footer>
         </main>
     )
 }
