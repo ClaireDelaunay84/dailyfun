@@ -413,10 +413,10 @@ function buildEmail(scripts: ReelScript[], weekLabel: string): string {
         <div style="font-size:18px;color:#374151;margin-top:6px;">Planning complet — ${weekLabel}</div>
         <div style="margin-top:16px;padding:16px 20px;background:white;border-radius:12px;text-align:left;font-size:13px;color:#374151;">
             <div style="font-weight:700;margin-bottom:8px;color:#111827;">📅 Planning semaine :</div>
-            <div style="margin-bottom:4px;">🖼️ <strong>8h30 tous les jours</strong> — Slider automatique (Make.com)</div>
-            <div style="margin-bottom:4px;">🌍 <strong>9h Mar / Jeu / Sam</strong> — Reel Journée Internationale</div>
-            <div style="margin-bottom:4px;">🎬 <strong>21h Lun / Mer / Ven / Dim</strong> — Reel Film du jour</div>
-            <div style="margin-bottom:4px;">🧠 <strong>21h Mar / Jeu / Sam</strong> — Reel Anecdote</div>
+            <div style="margin-bottom:4px;">🌍 <strong>9h tous les jours</strong> — Journée Internationale</div>
+            <div style="margin-bottom:4px;">🎬 <strong>Soir Lun / Mer / Sam</strong> — Film sorti ce jour</div>
+            <div style="margin-bottom:4px;">🎵 <strong>Soir Jeudi</strong> — Musique sortie ce jour</div>
+            <div style="margin-bottom:4px;">🧠 <strong>Soir Mar / Ven / Dim</strong> — Le saviez-vous ?</div>
             <div>📅 <strong>Chaque soir</strong> — Story "C'est arrivé un..."</div>
         </div>
     </div>
