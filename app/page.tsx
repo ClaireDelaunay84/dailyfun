@@ -13,11 +13,12 @@ import NaissancesCard from "./components/NaissancesCard"
 import DecesCard from "./components/DecesCard"
 import FilmsCard from "./components/FilmsCard"
 
-const C1 = { bg: "#DDD0BC", shadow: "rgba(160,130,95,0.55)", icon: "#A8917A" }
-const C2 = { bg: "#C9B393", shadow: "rgba(140,105,60,0.55)",  icon: "#8A6E4A" }
-const C3 = { bg: "#C4B09E", shadow: "rgba(130,95,75,0.55)",   icon: "#82604E" }
-const C4 = { bg: "#B09478", shadow: "rgba(110,75,45,0.55)",   icon: "#725A42" }
-const C5 = { bg: "#C2B8AC", shadow: "rgba(120,108,95,0.55)",  icon: "#7E7268" }
+// ── Palette Soft Sunrise ──
+const C1 = { bg: "rgba(146,171,211,0.65)", shadow: "rgba(74,90,122,0.4)",   icon: "#ffffff" }
+const C2 = { bg: "rgba(228,156,149,0.65)", shadow: "rgba(180,80,74,0.4)",   icon: "#ffffff" }
+const C3 = { bg: "rgba(250,192,152,0.65)", shadow: "rgba(200,120,60,0.4)",  icon: "#ffffff" }
+const C4 = { bg: "rgba(133,153,136,0.65)", shadow: "rgba(60,90,65,0.4)",    icon: "#ffffff" }
+const C5 = { bg: "rgba(180,160,200,0.65)", shadow: "rgba(100,70,140,0.4)",  icon: "#ffffff" }
 
 const SECTIONS = [
     { id: "fete",        label: "Fête du jour",   clay: C1 },
@@ -56,7 +57,9 @@ function clayStyle(clay: { bg: string; shadow: string }, size = 56): React.CSSPr
         width: size, height: size,
         borderRadius: Math.round(size * 0.3),
         background: clay.bg,
-        boxShadow: `5px 6px 12px ${clay.shadow}, 0 2px 4px ${clay.shadow}`,
+        boxShadow: `4px 5px 10px ${clay.shadow}`,
+        border: "1px solid rgba(255,255,255,0.25)",
+        backdropFilter: "blur(8px)",
         display: "flex", alignItems: "center", justifyContent: "center",
         flexShrink: 0,
     }
@@ -85,79 +88,58 @@ function CalendrierWidget() {
     const jour = today.getDate()
     const annee = today.getFullYear()
     const moisIndex = today.getMonth()
-    const jourSemaine = today.getDay() // 0=dim
 
-    // Jours du mois
     const premierJour = new Date(annee, moisIndex, 1).getDay()
     const nbJours = new Date(annee, moisIndex + 1, 0).getDate()
-    const offset = premierJour === 0 ? 6 : premierJour - 1 // lundi en premier
+    const offset = premierJour === 0 ? 6 : premierJour - 1
 
     const jours = ["L", "M", "M", "J", "V", "S", "D"]
     const cases = Array(offset).fill(null).concat(Array.from({ length: nbJours }, (_, i) => i + 1))
 
     return (
         <div style={{
-            background: "rgba(220, 208, 190, 0.45)",
+            background: "rgba(146,171,211,0.25)",
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
             borderRadius: "18px",
             padding: "16px 18px",
-            border: "1px solid rgba(217,204,186,0.4)",
-            boxShadow: "4px 5px 12px rgba(160,130,95,0.3)",
+            border: "1px solid rgba(255,255,255,0.2)",
+            boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
             display: "flex",
             gap: "16px",
             alignItems: "flex-start",
         }}>
-            {/* Gauche — mois + jour */}
             <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", minWidth: "64px" }}>
                 <span style={{
                     fontFamily: "var(--font-body)",
                     fontSize: "11px",
                     fontWeight: 500,
-                    color: "#9E7F5C",
+                    color: "rgba(255,255,255,0.7)",
                     letterSpacing: "2px",
                     textTransform: "uppercase",
                 }}>{mois}</span>
                 <span style={{
-                    fontFamily: "'Mr De Haviland', cursive",
-                    fontSize: "72px",
-                    color: "#5C4430",
+                    fontFamily: "'Qwitcher Grypen', cursive",
+                    fontSize: "88px",
+                    color: "#ffffff",
                     lineHeight: 1,
                     marginTop: "-4px",
                 }}>{jour}</span>
             </div>
-
-            {/* Droite — mini calendrier */}
             <div style={{ flex: 1 }}>
-                {/* En-tête jours */}
-                <div style={{
-                    display: "grid",
-                    gridTemplateColumns: "repeat(7, 1fr)",
-                    marginBottom: "4px",
-                    gap: "1px",
-                }}>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", marginBottom: "4px", gap: "1px" }}>
                     {jours.map((j, i) => (
-                        <span key={i} style={{
-                            fontSize: "8px",
-                            fontWeight: 500,
-                            color: "#9C8A76",
-                            textAlign: "center",
-                            letterSpacing: "0.5px",
-                        }}>{j}</span>
+                        <span key={i} style={{ fontSize: "8px", fontWeight: 500, color: "rgba(255,255,255,0.5)", textAlign: "center", letterSpacing: "0.5px" }}>{j}</span>
                     ))}
                 </div>
-                {/* Cases */}
-                <div style={{
-                    display: "grid",
-                    gridTemplateColumns: "repeat(7, 1fr)",
-                    gap: "1px",
-                }}>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: "1px" }}>
                     {cases.map((d, i) => (
                         <span key={i} style={{
                             fontSize: "9px",
                             textAlign: "center",
-                            padding: "2px 0",
                             borderRadius: "50%",
-                            background: d === jour ? "#9E7F5C" : "transparent",
-                            color: d === jour ? "#FAF7F2" : d ? "#5C4430" : "transparent",
+                            background: d === jour ? "rgba(255,255,255,0.3)" : "transparent",
+                            color: d ? "#ffffff" : "transparent",
                             fontWeight: d === jour ? 600 : 400,
                             lineHeight: "16px",
                             width: "16px",
@@ -180,11 +162,6 @@ export default function Home() {
     const [mobileOpen, setMobileOpen] = useState<string | null>(null)
     const [mobileAnimating, setMobileAnimating] = useState(false)
 
-    const today = new Date()
-    const dateStr = today.toLocaleDateString("fr-FR", {
-        weekday: "long", day: "numeric", month: "long", year: "numeric",
-    }).replace(/^\w/, c => c.toUpperCase())
-
     const switchTo = (id: string) => {
         if (id === active) return
         setAnimating(true)
@@ -200,13 +177,13 @@ export default function Home() {
     }
 
     const quickSections = SECTIONS.filter(s => s.id !== active).slice(0, 3)
-    const otherMobile = SECTIONS.filter(s => s.id !== mobileOpen).slice(0, 3)
 
     return (
         <main className={styles.main}>
+
             <header className={styles.header}>
                 <div className={styles.headerLeft}>
-                    <div style={{display: "flex", flexDirection: "column", gap: "0px"}}>
+                    <div style={{ display: "flex", flexDirection: "column", gap: "0px" }}>
                         <span className={styles.headerLogo}>Dailyfun</span>
                         <span className={styles.headerTagline}>Ta dose quotidienne de culture</span>
                     </div>
@@ -224,21 +201,22 @@ export default function Home() {
                     <p className={styles.sidebarTitle}>Rubriques du jour</p>
                     {SECTIONS.map(s => (
                         <div key={s.id} className={styles.sidebarItem}
-                             style={active === s.id ? {background: s.clay.bg + "55"} : {}}
+                             style={active === s.id ? { background: "rgba(255,255,255,0.15)" } : {}}
                              onClick={() => switchTo(s.id)}>
                             <div className={styles.sidebarIcon} style={{
                                 background: s.clay.bg,
                                 boxShadow: `3px 4px 8px ${s.clay.shadow}`,
                             }}>
-                                <SectionIcon id={s.id} color={s.clay.icon} size={18}/>
+                                <SectionIcon id={s.id} color={s.clay.icon} size={18} />
                             </div>
                             <span className={styles.sidebarLabel}
-                                  style={active === s.id ? {color: "#5C4430", fontWeight: 600} : {}}>
+                                  style={active === s.id ? { color: "#ffffff", fontWeight: 600 } : {}}>
                                 {s.label}
                             </span>
                         </div>
                     ))}
                 </aside>
+
                 <div className={styles.content}>
                     <div className={styles.desktopView}>
                         <div className={styles.activeCardWrap} style={{
@@ -246,22 +224,7 @@ export default function Home() {
                             transform: animating ? "translateY(8px)" : "translateY(0)",
                             transition: "opacity 0.22s ease, transform 0.22s ease",
                         }}>
-                            <CardForSection id={active}/>
-                        </div>
-                        <div>
-                            <p className={styles.quickNavLabel}>Autres rubriques du jour</p>
-                            <div className={styles.quickNav}>
-                                {quickSections.map(s => (
-                                    <div key={s.id} className={styles.quickNavItem}
-                                         style={{background: s.clay.bg + "44"}}
-                                         onClick={() => switchTo(s.id)}>
-                                        <div className={styles.quickNavIcon} style={clayStyle(s.clay, 28)}>
-                                            <SectionIcon id={s.id} color={s.clay.icon} size={14}/>
-                                        </div>
-                                        <span className={styles.quickNavText}>{s.label}</span>
-                                    </div>
-                                ))}
-                            </div>
+                            <CardForSection id={active} />
                         </div>
                     </div>
                 </div>
@@ -276,13 +239,12 @@ export default function Home() {
                     transition: "opacity 0.22s ease, transform 0.22s ease",
                     display: mobileOpen ? "none" : "flex",
                 }}>
-                    <CalendrierWidget/>
-
+                    <CalendrierWidget />
                     <div className={styles.mobileGrid}>
                         {SECTIONS.map(s => (
                             <div key={s.id} className={styles.mobileAppItem} onClick={() => openMobile(s.id)}>
                                 <div className={styles.mobileAppIcon} style={clayStyle(s.clay, 56)}>
-                                    <SectionIcon id={s.id} color={s.clay.icon} size={28}/>
+                                    <SectionIcon id={s.id} color={s.clay.icon} size={28} />
                                 </div>
                                 <span className={styles.mobileAppLabel}>{s.label}</span>
                             </div>
@@ -297,7 +259,7 @@ export default function Home() {
                         transition: "opacity 0.22s ease, transform 0.22s ease",
                     }}>
                         <button className={styles.mobileBack} onClick={closeMobile}>‹ Retour</button>
-                        <CardForSection id={mobileOpen}/>
+                        <CardForSection id={mobileOpen} />
                     </div>
                 )}
             </div>
@@ -307,20 +269,25 @@ export default function Home() {
                     ♡ Soutenir
                 </a>
             </div>
+
             <footer style={{
                 textAlign: "center",
                 padding: "16px",
                 fontSize: "11px",
-                color: "#9C8A76",
+                color: "rgba(255,255,255,0.4)",
+                display: "flex",
+                justifyContent: "center",
+                gap: "16px",
             }}>
-                <a href="/privacy" style={{color: "#9C8A76", textDecoration: "underline"}}>
+                <a href="/privacy" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "underline" }}>
                     Politique de confidentialité
                 </a>
-                <span style={{color: "#D9CCBA"}}>-</span>
-                <a href="/privacy/deletion" style={{color: "#9C8A76", textDecoration: "underline"}}>
+                <span style={{ color: "rgba(255,255,255,0.2)" }}>·</span>
+                <a href="/privacy/deletion" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "underline" }}>
                     Suppression des données
                 </a>
             </footer>
+
         </main>
     )
 }

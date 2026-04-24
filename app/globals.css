@@ -1,26 +1,27 @@
 @import "tailwindcss";
 
 :root {
-    --bg:             #F0E8DA;
-    --bg-card:        #EAE0D0;
-    --bg-sand:        #E4D5BC;
-    --bg-taupe-rose:  #DCCDC0;
-    --bg-gris-beige:  #D6CEC4;
-    --bg-taupe-brun:  #C8B49A;
+    /* ── Palette Soft Sunrise ── */
+    --bg:             #1a1520;
+    --bg-card:        rgba(146,171,211,0.15);
+    --bg-sand:        rgba(228,156,149,0.15);
+    --bg-taupe-rose:  rgba(250,192,152,0.15);
+    --bg-gris-beige:  rgba(133,153,136,0.15);
+    --bg-taupe-brun:  rgba(146,171,211,0.2);
 
-    --sand-border:    #D9CCBA;
-    --taupe:          #9E7F5C;
-    --brown:          #5C4430;
-    --muted:          #9C8A76;
-    --cream:          #FAF7F2;
+    --sand-border:    rgba(255,255,255,0.15);
+    --taupe:          #92ABD3;
+    --brown:          #ffffff;
+    --muted:          rgba(255,255,255,0.65);
+    --cream:          #ffffff;
 
     --font-body:      var(--font-dm-sans, sans-serif);
-    --font-script:    'Mr De Haviland', cursive;
-    --font-licorice:  'Mr De Haviland', cursive;
+    --font-script:    'Qwitcher Grypen', cursive;
+    --font-licorice:  'Qwitcher Grypen', cursive;
     --font-jost:      var(--font-dm-sans, sans-serif);
 
-    --text-dark:  #3A2E22;
-    --text-muted: #9C8A76;
+    --text-dark:  #2A2A2A;
+    --text-muted: #555555;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }

@@ -60,7 +60,7 @@ export default function WeatherCard() {
                             <div key={label} style={{ background: "rgba(92,68,48,0.06)", borderRadius: "16px", padding: "14px", textAlign: "center" }}>
                                 <p style={{ fontSize: "0.7rem", color: "var(--text-muted)", letterSpacing: "1px", textTransform: "uppercase", marginBottom: "6px" }}>{label}</p>
                                 <p style={{ fontSize: "2.5rem", margin: "0" }}>{data.icon}</p>
-                                <p style={{ fontFamily: "var(--font-licorice)", fontSize: "2.2rem", color: "#5C4430", lineHeight: 1 }}>{data.temp}°</p>
+                                <p style={{ fontFamily: "var(--font-licorice)", fontSize: "5.2rem", color: "#5C4430", lineHeight: 1 }}>{data.temp}°</p>
                                 <p style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginTop: "4px", textTransform: "capitalize" }}>{data.description}</p>
                             </div>
                         ))}

@@ -8,27 +8,26 @@ type CardProps = {
     bgColor?: string
 }
 
-export default function Card({
-                                 title, children,
-                                 accent = "#5C4430",
-                                 bgColor = "#EAE0D0",
-                             }: CardProps) {
+export default function Card({ title, children }: CardProps) {
     return (
         <div style={{
             borderRadius: "20px",
             overflow: "hidden",
             display: "flex",
             flexDirection: "column",
-            background: bgColor,
-            border: "1px solid #D9CCBA",
-            boxShadow: "4px 5px 14px rgba(160,130,95,0.25)",
+            background: "rgba(255,255,255,0.1)",
+            backdropFilter: "blur(16px)",
+            WebkitBackdropFilter: "blur(16px)",
+            border: "1px solid rgba(255,255,255,0.2)",
+            boxShadow: "0 8px 32px rgba(0,0,0,0.2)",
+            width: "100%",
         }}>
             <div style={{
-                padding: "12px 20px 10px",
-                borderBottom: "1px solid rgba(217,204,186,0.6)",
+                padding: "16px 20px",
+                borderBottom: "1px solid rgba(255,255,255,0.12)",
             }}>
                 <p style={{
-                    color: "#9C8A76",
+                    color: "rgba(255,255,255,0.6)",
                     fontSize: "0.58rem",
                     letterSpacing: "2.5px",
                     textTransform: "uppercase",
@@ -39,10 +38,9 @@ export default function Card({
                 </p>
             </div>
             <div style={{
-                padding: "20px 24px",
-                color: "var(--text-dark)",
+                padding: "20px",
+                color: "#2A2A2A",
                 lineHeight: 1.6,
-                background: "rgba(255,255,255,0.25)",
             }}>
                 {children}
             </div>

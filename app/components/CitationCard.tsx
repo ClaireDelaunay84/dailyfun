@@ -65,7 +65,7 @@ export default function CitationCard() {
                     }
                 </div>
                 <div style={{ flex: 1 }}>
-                    <p style={{ fontFamily: "var(--font-licorice)", fontSize: "1.7rem", color: "#5C4430", lineHeight: 1.3, marginBottom: "10px" }}>
+                    <p style={{ fontFamily: "var(--font-licorice)", fontSize: "2.7rem", color: "#5C4430", lineHeight: 1, marginBottom: "10px" }}>
                         "{current.texte}"
                     </p>
                     <p style={{ fontSize: "0.85rem", fontWeight: 600, color: "#9E7F5C", letterSpacing: "0.5px" }}>

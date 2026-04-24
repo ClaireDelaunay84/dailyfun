@@ -75,7 +75,7 @@ export default function ArriveCard() {
                         }
                     </div>
                     <div style={{ flex: 1 }}>
-                        <p style={{ fontFamily: "var(--font-licorice)", fontSize: "1.8rem", color: "#5C4430", lineHeight: 1, marginBottom: "8px" }}>En {current.annee}</p>
+                        <p style={{ fontFamily: "var(--font-licorice)", fontSize: "2.8rem", color: "#5C4430", lineHeight: 1, marginBottom: "8px" }}>En {current.annee}</p>
                         <p style={{ fontSize: "0.95rem", lineHeight: 1.7, color: "var(--text-dark)" }}>{current.texte}</p>
                     </div>
                 </div>

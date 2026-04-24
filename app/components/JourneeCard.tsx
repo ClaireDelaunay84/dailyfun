@@ -49,7 +49,7 @@ export default function JourneeCard() {
                 }}
                 style={{ opacity: fading ? 0 : 1, transition: "opacity 0.3s ease", display: "flex", flexDirection: "column", gap: "12px" }}
             >
-                <p style={{ fontFamily: "var(--font-licorice)", fontSize: "2.4rem", color: "#5C4430", lineHeight: 1.2 }}>
+                <p style={{ fontFamily: "var(--font-licorice)", fontSize: "2.7rem", color: "#5C4430", lineHeight: 1.2 }}>
                     {current.nom}
                 </p>
                 <p style={{ fontSize: "0.95rem", lineHeight: 1.75, color: "var(--text-muted)", borderLeft: "3px solid #C8B49A", paddingLeft: "14px" }}>

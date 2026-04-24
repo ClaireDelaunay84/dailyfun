@@ -114,13 +114,20 @@ export default function NaissancesCard() {
                             </div>
                         </div>
                         {current.extrait && (
-                            <p style={{ fontSize: "0.82rem", lineHeight: 1.7, color: "var(--text-muted)", marginTop: "14px", borderLeft: "3px solid #C8B49A", paddingLeft: "12px", display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical" as const, overflow: "visible" }}>
+                            <p style={{
+                                fontSize: "0.85rem",
+                                lineHeight: 1.75,
+                                color: "#555555",
+                                borderLeft: "3px solid rgba(255,255,255,0.3)",
+                                paddingLeft: "14px",
+                                marginTop: "4px"
+                            }}>
                                 {current.extrait}
                             </p>
                         )}
                     </>
                 ) : (
-                    <p style={{ color: "var(--text-muted)", textAlign: "center" }}>Aucune naissance trouvée.</p>
+                    <p style={{color: "var(--text-muted)", textAlign: "center"}}>Aucune naissance trouvée.</p>
                 )}
             </div>
         </Card>

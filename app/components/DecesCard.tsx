@@ -103,7 +103,7 @@ export default function DecesCard() {
                             </div>
                         </div>
                         <div style={{flex:1}}>
-                            <p style={{fontFamily:"var(--font-licorice)",fontSize:"1.8rem",color:"#5C4430",lineHeight:1,marginBottom:"4px"}}>{current.nom}</p>
+                            <p style={{fontFamily:"var(--font-licorice)",fontSize:"2.8rem",color:"#5C4430",lineHeight:1,marginBottom:"4px"}}>{current.nom}</p>
                             <p style={{fontSize:"0.8rem",color:"var(--text-muted)",marginBottom:"6px"}}>{current.description}</p>
                             <div style={{display:"flex",gap:"8px",alignItems:"center",flexWrap:"wrap"}}>
                                 <span style={{fontSize:"0.8rem",fontWeight:700,color:"#9E7F5C"}}>🕯️ {current.anneeDeces}</span>
@@ -112,13 +112,20 @@ export default function DecesCard() {
                             </div>
                         </div>
                     </div>
-                    {current.extrait&&(
-                        <p style={{fontSize:"0.85rem",lineHeight:1.75,color:"var(--text-muted)",borderLeft:"3px solid #C8B49A",paddingLeft:"14px",display:"-webkit-box",WebkitLineClamp:3,WebkitBoxOrient:"vertical" as const,overflow:"visible"}}>
+                    {current.extrait&& (
+                        <p style={{
+                            fontSize: "0.85rem",
+                            lineHeight: 1.75,
+                            color: "#555555",
+                            borderLeft: "3px solid rgba(255,255,255,0.3)",
+                            paddingLeft: "14px",
+                            marginTop: "4px"
+                        }}>
                             {current.extrait}
                         </p>
                     )}
                 </div>
-            ):<p style={{color:"var(--text-muted)"}}>Aucun décès trouvé.</p>}
+            ) : <p style={{color: "var(--text-muted)"}}>Aucun décès trouvé.</p>}
         </Card>
     )
 }

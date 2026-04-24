@@ -9,10 +9,10 @@ export default function DictonCard() {
                 <span style={{ fontSize: "2.5rem" }}>🌿</span>
                 <p style={{
                     fontFamily: "var(--font-licorice)",
-                    fontSize: "1.8rem",
+                    fontSize: "2.7rem",
                     color: "#5C4430",
                     textAlign: "center",
-                    lineHeight: 1.4,
+                    lineHeight: 1,
                 }}>
                     "{dicton}"
                 </p>
