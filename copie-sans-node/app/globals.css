@@ -1,28 +1,34 @@
 @import "tailwindcss";
 
 :root {
-  --mint-dark:    #2d4a44;
-  --mint:         #3d8a78;
-  --mint-medium:  #5ab5a0;
-  --mint-light:   #a8d8d0;
-  --bg:           #f0faf8;
+    /* ── Palette Soft Sunrise ── */
+    --bg:             #1a1520;
+    --bg-card:        rgba(146,171,211,0.15);
+    --bg-sand:        rgba(228,156,149,0.15);
+    --bg-taupe-rose:  rgba(250,192,152,0.15);
+    --bg-gris-beige:  rgba(133,153,136,0.15);
+    --bg-taupe-brun:  rgba(146,171,211,0.2);
 
-  --text-dark:    #2d4a44;
-  --text-muted:   #6a8e88;
+    --sand-border:    rgba(255,255,255,0.15);
+    --taupe:          #92ABD3;
+    --brown:          #ffffff;
+    --muted:          rgba(255,255,255,0.65);
+    --cream:          #ffffff;
 
-  /* Jost via next/font */
-  --font-jost:    var(--font-jost-var, sans-serif);
+    --font-body:      var(--font-dm-sans, sans-serif);
+    --font-script:    'Qwitcher Grypen', cursive;
+    --font-licorice:  'Qwitcher Grypen', cursive;
+    --font-jost:      var(--font-dm-sans, sans-serif);
 
-  /* Licorice via CDN — utilisé directement en CSS */
-  --font-licorice: 'Licorice', cursive;
+    --text-dark:  #2A2A2A;
+    --text-muted: #555555;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-  background-color: var(--bg);
-  color: var(--text-dark);
-  font-family: var(--font-jost);
-  min-height: 100vh;
-  overflow-x: hidden;
+    color: var(--text-dark);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    overflow-x: hidden;
 }

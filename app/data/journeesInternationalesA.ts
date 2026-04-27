@@ -627,8 +627,8 @@ export const journeesA: Record<string, JourneeInternationale[]> = {
             description: "🐾 La Journée Internationale des Chiens-Guides rend hommage à ces compagnons d'exception qui offrent autonomie et liberté aux personnes malvoyantes — des héros à quatre pattes formés avec rigueur pour devenir de véritables yeux au quotidien ! ❤️" },
     ],
     "04-27": [
-        { nom: "Journée mondiale du design graphique", description: "Le design graphique existe depuis les premières inscriptions humaines. Paul Rand a créé les logos d'IBM, ABC et UPS. Un seul homme a dessiné les icônes visuelles de 3 géants américains du XXe siècle !" },
-        { nom: "Journée nationale du rouleau de printemps", description: "Le rouleau de printemps vietnamien (frais) et le rouleau de printemps frit chinois n'ont que le nom en commun. Les deux sont célébrés lors du Nouvel An lunaire — la saison du renouveau et des bonnes saveurs !" },
+        { nom: "Journée du code Morse",
+            description: "Date de naissance de Samuel Morse en 1791, la Journée du Code Morse célèbre ce système de points et de tirets qui a révolutionné la communication humaine — et qui fascine encore aujourd'hui les passionnés du monde entier ! ⚡✨" },
     ],
     "04-28": [
         { nom: "Journée mondiale de la sécurité et de la santé au travail", description: "2,3 millions de personnes meurent chaque année d'accidents du travail. Le travail devrait nous construire, pas nous détruire. La Finlande a réduit ses accidents du travail de 70% en 30 ans grâce à la prévention !" },

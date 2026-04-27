@@ -2,11 +2,7 @@
   "crons": [
     {
       "path": "/api/daily-script",
-      "schedule": "0 6 * * *"
-    },
-    {
-      "path": "/api/reels-scripts",
-      "schedule": "0 17 * * 0"
+      "schedule": "0 4 * * *"
     }
   ]
 }

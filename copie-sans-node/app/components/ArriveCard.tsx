@@ -45,44 +45,18 @@ export default function ArriveCard() {
     const current = evenements[index]
 
     return (
-        <Card title={`C'est arrivé un ${jour} ${mois}`} emoji="📅" bgColor="#c8ece6" accent="#2d6a5e">
-
-            {/* ── NAVIGATION ── */}
+        <Card title={`C'est arrivé un ${jour} ${mois}`} bgColor="#DCCDC0" accent="#5C4430">
             {evenements.length > 1 && (
                 <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
-
-                    <button onClick={goPrev} style={{
-                        width: "34px", height: "34px", borderRadius: "50%",
-                        border: "1.5px solid #2d6a5e44", background: "rgba(255,255,255,0.7)",
-                        cursor: "pointer", fontSize: "16px", display: "flex",
-                        alignItems: "center", justifyContent: "center", flexShrink: 0,
-                        color: "#2d6a5e", transition: "background 0.2s",
-                    }}>‹</button>
-
+                    <button onClick={goPrev} style={{ width: "34px", height: "34px", borderRadius: "50%", border: "1.5px solid #D9CCBA", background: "rgba(255,255,255,0.5)", cursor: "pointer", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, color: "#9E7F5C" }}>‹</button>
                     <div style={{ display: "flex", gap: "6px", flex: 1, justifyContent: "center" }}>
                         {evenements.map((_, i) => (
-                            <button key={i} onClick={() => goTo(i)} style={{
-                                width: i === index ? "22px" : "10px",
-                                height: "10px", borderRadius: "20px",
-                                background: i === index ? "#2d6a5e" : "#2d6a5e33",
-                                border: "none", cursor: "pointer", padding: 0,
-                                transition: "all 0.3s ease",
-                            }} />
+                            <button key={i} onClick={() => goTo(i)} style={{ width: i === index ? "22px" : "10px", height: "10px", borderRadius: "20px", background: i === index ? "#9E7F5C" : "#9E7F5C33", border: "none", cursor: "pointer", padding: 0, transition: "all 0.3s ease" }} />
                         ))}
                     </div>
-
-                    <button onClick={goNext} style={{
-                        width: "34px", height: "34px", borderRadius: "50%",
-                        border: "1.5px solid #2d6a5e44", background: "rgba(255,255,255,0.7)",
-                        cursor: "pointer", fontSize: "16px", display: "flex",
-                        alignItems: "center", justifyContent: "center", flexShrink: 0,
-                        color: "#2d6a5e", transition: "background 0.2s",
-                    }}>›</button>
-
+                    <button onClick={goNext} style={{ width: "34px", height: "34px", borderRadius: "50%", border: "1.5px solid #D9CCBA", background: "rgba(255,255,255,0.5)", cursor: "pointer", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, color: "#9E7F5C" }}>›</button>
                 </div>
             )}
-
-            {/* ── CONTENU avec swipe ── */}
             {loading ? <p style={{ color: "var(--text-muted)" }}>Chargement...</p> : current ? (
                 <div
                     onTouchStart={e => setTouchStartX(e.touches[0].clientX)}
@@ -94,19 +68,18 @@ export default function ArriveCard() {
                     }}
                     style={{ opacity: fading ? 0 : 1, transition: "opacity 0.3s", display: "flex", gap: "16px", alignItems: "flex-start" }}
                 >
-                    <div style={{ width: "80px", height: "80px", borderRadius: "14px", flexShrink: 0, overflow: "hidden", background: "rgba(45,106,94,0.1)", border: "2px solid #2d6a5e22", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <div style={{ width: "80px", height: "80px", borderRadius: "14px", flexShrink: 0, overflow: "hidden", background: "rgba(158,127,92,0.1)", border: "2px solid #D9CCBA", display: "flex", alignItems: "center", justifyContent: "center" }}>
                         {current.imageUrl
-                            ? <img src={current.imageUrl} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                            ? <img src={`/api/wiki-image?url=${encodeURIComponent(current.imageUrl!)}`} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                             : <span style={{ fontSize: "2.5rem" }}>📅</span>
                         }
                     </div>
                     <div style={{ flex: 1 }}>
-                        <p style={{ fontFamily: "var(--font-licorice)", fontSize: "1.8rem", color: "#2d6a5e", lineHeight: 1, marginBottom: "8px" }}>En {current.annee}</p>
+                        <p style={{ fontFamily: "var(--font-licorice)", fontSize: "2.8rem", color: "#5C4430", lineHeight: 1, marginBottom: "8px" }}>En {current.annee}</p>
                         <p style={{ fontSize: "0.95rem", lineHeight: 1.7, color: "var(--text-dark)" }}>{current.texte}</p>
                     </div>
                 </div>
             ) : <p style={{ color: "var(--text-muted)" }}>Aucun événement trouvé.</p>}
-
         </Card>
     )
 }

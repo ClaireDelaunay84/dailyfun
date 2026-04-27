@@ -54,7 +54,6 @@ export default function NaissancesCard() {
             .catch(() => setLoading(false))
     }, [MM, DD])
 
-    // Auto-avance toutes les 20s
     useEffect(() => {
         if (personnes.length <= 1) return
         const interval = setInterval(() => {
@@ -63,54 +62,23 @@ export default function NaissancesCard() {
         return () => clearInterval(interval)
     }, [personnes.length])
 
-    const goTo = (i: number) => setIndex(i)
     const goPrev = () => setIndex(i => (i - 1 + personnes.length) % personnes.length)
     const goNext = () => setIndex(i => (i + 1) % personnes.length)
-
     const current = personnes[index]
 
     return (
-        <Card title={`Ils sont nés un ${jour} ${mois}`} emoji="🎂" bgColor="#f0d8ec" accent="#7a3a6a">
-
-            {/* ── NAVIGATION ── */}
+        <Card title={`Ils sont nés un ${jour} ${mois}`} bgColor="#D6CEC4" accent="#5C4430">
             {personnes.length > 1 && (
                 <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
-
-                    {/* Flèche gauche */}
-                    <button onClick={goPrev} style={{
-                        width: "34px", height: "34px", borderRadius: "50%",
-                        border: "1.5px solid #7a3a6a44", background: "rgba(255,255,255,0.7)",
-                        cursor: "pointer", fontSize: "16px", display: "flex",
-                        alignItems: "center", justifyContent: "center", flexShrink: 0,
-                        color: "#7a3a6a", transition: "background 0.2s",
-                    }}>‹</button>
-
-                    {/* Dots centrés */}
+                    <button onClick={goPrev} style={{ width: "34px", height: "34px", borderRadius: "50%", border: "1.5px solid #D9CCBA", background: "rgba(255,255,255,0.5)", cursor: "pointer", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, color: "#9E7F5C" }}>‹</button>
                     <div style={{ display: "flex", gap: "6px", flex: 1, justifyContent: "center" }}>
                         {personnes.map((_, i) => (
-                            <button key={i} onClick={() => goTo(i)} style={{
-                                width: i === index ? "22px" : "10px",
-                                height: "10px", borderRadius: "20px",
-                                background: i === index ? "#7a3a6a" : "#7a3a6a33",
-                                border: "none", cursor: "pointer", padding: 0,
-                                transition: "all 0.3s ease",
-                            }} />
+                            <button key={i} onClick={() => setIndex(i)} style={{ width: i === index ? "22px" : "10px", height: "10px", borderRadius: "20px", background: i === index ? "#9E7F5C" : "#9E7F5C33", border: "none", cursor: "pointer", padding: 0, transition: "all 0.3s ease" }} />
                         ))}
                     </div>
-
-                    {/* Flèche droite */}
-                    <button onClick={goNext} style={{
-                        width: "34px", height: "34px", borderRadius: "50%",
-                        border: "1.5px solid #7a3a6a44", background: "rgba(255,255,255,0.7)",
-                        cursor: "pointer", fontSize: "16px", display: "flex",
-                        alignItems: "center", justifyContent: "center", flexShrink: 0,
-                        color: "#7a3a6a", transition: "background 0.2s",
-                    }}>›</button>
-
+                    <button onClick={goNext} style={{ width: "34px", height: "34px", borderRadius: "50%", border: "1.5px solid #D9CCBA", background: "rgba(255,255,255,0.5)", cursor: "pointer", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, color: "#9E7F5C" }}>›</button>
                 </div>
             )}
-
-            {/* ── CONTENU avec swipe ── */}
             <div
                 onTouchStart={e => setTouchStartX(e.touches[0].clientX)}
                 onTouchEnd={e => {
@@ -126,9 +94,9 @@ export default function NaissancesCard() {
                     <>
                         <div style={{ display: "flex", gap: "14px", alignItems: "center" }}>
                             <div style={{ position: "relative", flexShrink: 0 }}>
-                                <div style={{ width: "72px", height: "72px", borderRadius: "50%", overflow: "hidden", background: "rgba(122,58,106,0.12)", border: "2px solid #7a3a6a33", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                <div style={{ width: "72px", height: "72px", borderRadius: "50%", overflow: "hidden", background: "rgba(158,127,92,0.12)", border: "2px solid #D9CCBA", display: "flex", alignItems: "center", justifyContent: "center" }}>
                                     {current.imageUrl
-                                        ? <img src={current.imageUrl} alt={current.nom} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center" }} />
+                                        ? <img src={`/api/wiki-image?url=${encodeURIComponent(current.imageUrl)}`} alt={current.nom} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center" }} />
                                         : <span style={{ fontSize: "2rem" }}>{current.emoji}</span>
                                     }
                                 </div>
@@ -137,22 +105,29 @@ export default function NaissancesCard() {
                                 </div>
                             </div>
                             <div style={{ flex: 1 }}>
-                                <p style={{ fontSize: "1rem", fontWeight: 700, fontFamily: "var(--font-jost)", color: "var(--text-dark)", marginBottom: "4px", lineHeight: 1.2 }}>{current.nom}</p>
+                                <p style={{ fontSize: "1rem", fontWeight: 700, color: "var(--text-dark)", marginBottom: "4px", lineHeight: 1.2 }}>{current.nom}</p>
                                 <p style={{ fontSize: "0.78rem", color: "var(--text-muted)", marginBottom: "6px" }}>{current.description}</p>
                                 <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-                                    <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "#7a3a6a" }}>🎂 {current.annee}</span>
-                                    <span style={{ fontSize: "0.72rem", color: "var(--text-muted)", background: "rgba(122,58,106,0.08)", padding: "2px 8px", borderRadius: "20px" }}>{current.age} ans</span>
+                                    <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "#9E7F5C" }}>🎂 {current.annee}</span>
+                                    <span style={{ fontSize: "0.72rem", color: "var(--text-muted)", background: "rgba(158,127,92,0.1)", padding: "2px 8px", borderRadius: "20px" }}>{current.age} ans</span>
                                 </div>
                             </div>
                         </div>
                         {current.extrait && (
-                            <p style={{ fontSize: "0.82rem", lineHeight: 1.7, color: "var(--text-muted)", marginTop: "14px", borderLeft: "3px solid #7a3a6a33", paddingLeft: "12px", display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical" as const, overflow: "visible" }}>
+                            <p style={{
+                                fontSize: "0.85rem",
+                                lineHeight: 1.75,
+                                color: "#555555",
+                                borderLeft: "3px solid rgba(255,255,255,0.3)",
+                                paddingLeft: "14px",
+                                marginTop: "4px"
+                            }}>
                                 {current.extrait}
                             </p>
                         )}
                     </>
                 ) : (
-                    <p style={{ color: "var(--text-muted)", textAlign: "center" }}>Aucune naissance trouvée.</p>
+                    <p style={{color: "var(--text-muted)", textAlign: "center"}}>Aucune naissance trouvée.</p>
                 )}
             </div>
         </Card>

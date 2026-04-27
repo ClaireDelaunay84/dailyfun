@@ -47,7 +47,7 @@ export default function DecesCard() {
                 }
                 let anneeNaissance:number|null=null
                 if(extrait){const m=extrait.match(/née? (?:le )?\d{1,2}[^\d]+(\d{4})|(\d{4})\s*[-–]\s*\d{4}/);if(m)anneeNaissance=parseInt(m[1]??m[2])}
-                return{nom,anneeNaissance,anneeDeces:b.year,age:anneeNaissance?b.year-anneeNaissance:null,description,emoji:getEmoji(description),imageUrl:b.pages?.[0]?.thumbnail?.source?.replace(/\/\d+px-/,"/400px-")??null,extrait}
+                return{nom,anneeNaissance,anneeDeces:b.year,age:anneeNaissance?b.year-anneeNaissance:null,description,emoji:getEmoji(description),imageUrl:b.pages?.[0]?.thumbnail?.source?.replace(/\/\d+px-/, "/400px-")??null,extrait}
             }))
             setPersonnes(formatted);setLoading(false)
         }).catch(()=>setLoading(false))
@@ -64,48 +64,21 @@ export default function DecesCard() {
     const goTo = (i:number) => { setFading(true); setTimeout(()=>{setIndex(i);setFading(false)},300) }
     const goPrev = () => goTo((index - 1 + personnes.length) % personnes.length)
     const goNext = () => goTo((index + 1) % personnes.length)
-
     const current = personnes[index]
 
     return (
-        <Card title={`Ils sont partis un ${jour} ${mois}`} emoji="🕯️" bgColor="#d0dcea" accent="#3a4a6a">
-
-            {/* ── NAVIGATION ── */}
+        <Card title={`Ils sont partis un ${jour} ${mois}`} bgColor="#C8B49A" accent="#5C4430">
             {personnes.length > 1 && (
                 <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
-
-                    <button onClick={goPrev} style={{
-                        width: "34px", height: "34px", borderRadius: "50%",
-                        border: "1.5px solid #3a4a6a44", background: "rgba(255,255,255,0.7)",
-                        cursor: "pointer", fontSize: "16px", display: "flex",
-                        alignItems: "center", justifyContent: "center", flexShrink: 0,
-                        color: "#3a4a6a", transition: "background 0.2s",
-                    }}>‹</button>
-
+                    <button onClick={goPrev} style={{ width: "34px", height: "34px", borderRadius: "50%", border: "1.5px solid #D9CCBA", background: "rgba(255,255,255,0.5)", cursor: "pointer", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, color: "#9E7F5C" }}>‹</button>
                     <div style={{ display: "flex", gap: "6px", flex: 1, justifyContent: "center" }}>
                         {personnes.map((_, i) => (
-                            <button key={i} onClick={() => goTo(i)} style={{
-                                width: i === index ? "22px" : "10px",
-                                height: "10px", borderRadius: "20px",
-                                background: i === index ? "#3a4a6a" : "#3a4a6a33",
-                                border: "none", cursor: "pointer", padding: 0,
-                                transition: "all 0.3s ease",
-                            }} />
+                            <button key={i} onClick={() => goTo(i)} style={{ width: i === index ? "22px" : "10px", height: "10px", borderRadius: "20px", background: i === index ? "#9E7F5C" : "#9E7F5C33", border: "none", cursor: "pointer", padding: 0, transition: "all 0.3s ease" }} />
                         ))}
                     </div>
-
-                    <button onClick={goNext} style={{
-                        width: "34px", height: "34px", borderRadius: "50%",
-                        border: "1.5px solid #3a4a6a44", background: "rgba(255,255,255,0.7)",
-                        cursor: "pointer", fontSize: "16px", display: "flex",
-                        alignItems: "center", justifyContent: "center", flexShrink: 0,
-                        color: "#3a4a6a", transition: "background 0.2s",
-                    }}>›</button>
-
+                    <button onClick={goNext} style={{ width: "34px", height: "34px", borderRadius: "50%", border: "1.5px solid #D9CCBA", background: "rgba(255,255,255,0.5)", cursor: "pointer", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, color: "#9E7F5C" }}>›</button>
                 </div>
             )}
-
-            {/* ── CONTENU avec swipe ── */}
             {loading ? <p style={{color:"var(--text-muted)"}}>Chargement...</p> : current ? (
                 <div
                     onTouchStart={e => setTouchStartX(e.touches[0].clientX)}
@@ -119,9 +92,9 @@ export default function DecesCard() {
                 >
                     <div style={{display:"flex",gap:"16px",alignItems:"center",marginBottom:"14px"}}>
                         <div style={{position:"relative",flexShrink:0}}>
-                            <div style={{width:"76px",height:"76px",borderRadius:"50%",overflow:"hidden",background:"rgba(58,74,106,0.1)",border:"2px solid #3a4a6a33",display:"flex",alignItems:"center",justifyContent:"center"}}>
+                            <div style={{width:"76px",height:"76px",borderRadius:"50%",overflow:"hidden",background:"rgba(158,127,92,0.1)",border:"2px solid #D9CCBA",display:"flex",alignItems:"center",justifyContent:"center"}}>
                                 {current.imageUrl
-                                    ?<img src={current.imageUrl} alt={current.nom} style={{width:"100%",height:"100%",objectFit:"cover",objectPosition:"top center"}} />
+                                    ?<img src={`/api/wiki-image?url=${encodeURIComponent(current.imageUrl)}`} alt={current.nom} style={{width:"100%",height:"100%",objectFit:"cover",objectPosition:"top center"}} />
                                     :<span style={{fontSize:"2.2rem"}}>{current.emoji}</span>
                                 }
                             </div>
@@ -130,23 +103,29 @@ export default function DecesCard() {
                             </div>
                         </div>
                         <div style={{flex:1}}>
-                            <p style={{fontFamily:"var(--font-licorice)",fontSize:"1.8rem",color:"#3a4a6a",lineHeight:1,marginBottom:"4px"}}>{current.nom}</p>
+                            <p style={{fontFamily:"var(--font-licorice)",fontSize:"2.8rem",color:"#5C4430",lineHeight:1,marginBottom:"4px"}}>{current.nom}</p>
                             <p style={{fontSize:"0.8rem",color:"var(--text-muted)",marginBottom:"6px"}}>{current.description}</p>
                             <div style={{display:"flex",gap:"8px",alignItems:"center",flexWrap:"wrap"}}>
-                                <span style={{fontSize:"0.8rem",fontWeight:700,color:"#3a4a6a"}}>🕯️ {current.anneeDeces}</span>
-                                {current.anneeNaissance&&<span style={{fontSize:"0.75rem",color:"var(--text-muted)",background:"rgba(58,74,106,0.08)",padding:"2px 10px",borderRadius:"20px"}}>né(e) en {current.anneeNaissance}</span>}
-                                {current.age&&<span style={{fontSize:"0.75rem",color:"var(--text-muted)",background:"rgba(58,74,106,0.08)",padding:"2px 10px",borderRadius:"20px"}}>{current.age} ans</span>}
+                                <span style={{fontSize:"0.8rem",fontWeight:700,color:"#9E7F5C"}}>🕯️ {current.anneeDeces}</span>
+                                {current.anneeNaissance&&<span style={{fontSize:"0.75rem",color:"var(--text-muted)",background:"rgba(158,127,92,0.1)",padding:"2px 10px",borderRadius:"20px"}}>né(e) en {current.anneeNaissance}</span>}
+                                {current.age&&<span style={{fontSize:"0.75rem",color:"var(--text-muted)",background:"rgba(158,127,92,0.1)",padding:"2px 10px",borderRadius:"20px"}}>{current.age} ans</span>}
                             </div>
                         </div>
                     </div>
-                    {current.extrait&&(
-                        <p style={{fontSize:"0.85rem",lineHeight:1.75,color:"var(--text-muted)",borderLeft:"3px solid #3a4a6a33",paddingLeft:"14px",display:"-webkit-box",WebkitLineClamp:3,WebkitBoxOrient:"vertical" as const,overflow:"visible"}}>
+                    {current.extrait&& (
+                        <p style={{
+                            fontSize: "0.85rem",
+                            lineHeight: 1.75,
+                            color: "#555555",
+                            borderLeft: "3px solid rgba(255,255,255,0.3)",
+                            paddingLeft: "14px",
+                            marginTop: "4px"
+                        }}>
                             {current.extrait}
                         </p>
                     )}
                 </div>
-            ):<p style={{color:"var(--text-muted)"}}>Aucun décès trouvé.</p>}
-
+            ) : <p style={{color: "var(--text-muted)"}}>Aucun décès trouvé.</p>}
         </Card>
     )
 }
