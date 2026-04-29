@@ -12,6 +12,7 @@ import ArriveCard from "./components/ArriveCard"
 import NaissancesCard from "./components/NaissancesCard"
 import DecesCard from "./components/DecesCard"
 import FilmsCard from "./components/FilmsCard"
+import HoroscopeCard from "./components/HoroscopeCard"
 
 // ── Palette Soft Sunrise ──
 const C1 = { bg: "rgba(146,171,211,0.65)", shadow: "rgba(74,90,122,0.4)",   icon: "#ffffff" }
@@ -24,6 +25,7 @@ const SECTIONS = [
     { id: "fete",        label: "Fête du jour",   clay: C1 },
     { id: "ephemerides", label: "Éphémérides",    clay: C2 },
     { id: "meteo",       label: "Météo",           clay: C3 },
+    { id: "horoscope",   label: "Horoscope",      clay: { bg: "rgba(110,90,170,0.65)", shadow: "rgba(60,40,120,0.4)", icon: "#ffffff" } },
     { id: "journee",     label: "Journée intl.",   clay: C5 },
     { id: "saviez",      label: "Saviez-vous ?",   clay: C4 },
     { id: "citation",    label: "Citation",         clay: C1 },
@@ -48,6 +50,7 @@ function SectionIcon({ id, color, size = 28 }: { id: string; color: string; size
         case "naissance":   return <svg {...p}><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
         case "deces":       return <svg {...p}><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
         case "films":       return <svg {...p}><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/></svg>
+        case "horoscope": return <svg {...p}><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg>
         default:            return null
     }
 }
@@ -78,6 +81,7 @@ function CardForSection({ id }: { id: string }) {
         case "naissance":   return <NaissancesCard />
         case "deces":       return <DecesCard />
         case "films":       return <FilmsCard />
+        case "horoscope":   return <HoroscopeCard />
         default:            return null
     }
 }
@@ -264,12 +268,6 @@ export default function Home() {
                 )}
             </div>
 
-            <div className={styles.bmcMobile}>
-                <a href="https://www.buymeacoffee.com/dailyfun" target="_blank" className={styles.supportBtnMobile}>
-                    ♡ Soutenir
-                </a>
-            </div>
-
             <footer style={{
                 textAlign: "center",
                 padding: "16px",
@@ -279,11 +277,14 @@ export default function Home() {
                 justifyContent: "center",
                 gap: "16px",
             }}>
-                <a href="/privacy" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "underline" }}>
+                <a href="/credits" style={{color: "rgba(255,255,255,0.4)", textDecoration: "underline"}}>
+                    Crédits
+                </a>
+                <a href="/privacy" style={{color: "rgba(255,255,255,0.4)", textDecoration: "underline"}}>
                     Politique de confidentialité
                 </a>
-                <span style={{ color: "rgba(255,255,255,0.2)" }}>·</span>
-                <a href="/privacy/deletion" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "underline" }}>
+                <span style={{color: "rgba(255,255,255,0.2)"}}>·</span>
+                <a href="/privacy/deletion" style={{color: "rgba(255,255,255,0.4)", textDecoration: "underline"}}>
                     Suppression des données
                 </a>
             </footer>
