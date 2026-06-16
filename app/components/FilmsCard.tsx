@@ -1,6 +1,6 @@
 "use client"
 import { useState, useEffect } from "react"
-import Card from "./Card"
+import styles from "../page.module.css"
 
 type Film = {
     id: number
@@ -16,9 +16,8 @@ type Film = {
 
 export default function FilmsCard() {
     const [films, setFilms] = useState<Film[]>([])
-    const [index, setIndex] = useState(0)
+    const [selected, setSelected] = useState(0)
     const [loading, setLoading] = useState(true)
-    const [touchStartX, setTouchStartX] = useState<number | null>(null)
 
     const today = new Date()
     const jour = today.getDate()
@@ -31,74 +30,127 @@ export default function FilmsCard() {
             .catch(() => setLoading(false))
     }, [])
 
-    const current = films[index]
-    const goPrev = () => setIndex(i => (i - 1 + films.length) % films.length)
-    const goNext = () => setIndex(i => (i + 1) % films.length)
+    const current = films[selected]
+
+    if (loading) return (
+        <div className={styles.heroTeal}>
+            <div className={styles.badge}>CINÉMA</div>
+            <p style={{ color: "rgba(255,255,255,.7)", fontSize: 13 }}>Chargement des films...</p>
+        </div>
+    )
+
+    if (!current) return (
+        <div className={styles.heroTeal}>
+            <div className={styles.badge}>CINÉMA</div>
+            <p style={{ color: "rgba(255,255,255,.7)", fontSize: 13 }}>Aucun film trouvé.</p>
+        </div>
+    )
 
     return (
-        <Card title={`Grands films sortis un ${jour} ${mois}`} bgColor="#E4D5BC" accent="#5C4430">
-            {films.length > 1 && (
-                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
-                    <button onClick={goPrev} style={{ width: "34px", height: "34px", borderRadius: "50%", border: "1.5px solid #D9CCBA", background: "rgba(255,255,255,0.5)", cursor: "pointer", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", color: "#9E7F5C" }}>‹</button>
-                    <div style={{ display: "flex", gap: "6px", flex: 1, justifyContent: "center" }}>
-                        {films.map((_, i) => (
-                            <button key={i} onClick={() => setIndex(i)} style={{ width: i === index ? "22px" : "10px", height: "10px", borderRadius: "20px", background: i === index ? "#9E7F5C" : "#9E7F5C33", border: "none", cursor: "pointer", padding: 0, transition: "all 0.3s ease" }} />
-                        ))}
+        <div>
+            {/* ── Hero teal : film sélectionné ── */}
+            <div className={styles.heroTeal} style={{ marginBottom: 12 }}>
+                <div className={styles.badge}>FILMS SORTIS UN {jour} {mois.toUpperCase()}</div>
+
+                <div style={{ display: "flex", gap: 16, alignItems: "flex-start", marginTop: 10 }}>
+                    {/* Affiche */}
+                    <div style={{
+                        width: 90, height: 130, borderRadius: 10, flexShrink: 0,
+                        overflow: "hidden", background: "rgba(255,255,255,.1)",
+                        border: "1px solid rgba(255,255,255,.15)",
+                        display: "flex", alignItems: "center", justifyContent: "center",
+                    }}>
+                        {current.affiche
+                            ? <img src={current.affiche} alt={current.titre} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                            : <span style={{ fontSize: 32 }}>🎬</span>
+                        }
                     </div>
-                    <button onClick={goNext} style={{ width: "34px", height: "34px", borderRadius: "50%", border: "1.5px solid #D9CCBA", background: "rgba(255,255,255,0.5)", cursor: "pointer", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", color: "#9E7F5C" }}>›</button>
+
+                    {/* Infos */}
+                    <div style={{ flex: 1 }}>
+                        <span style={{
+                            fontSize: 10, fontWeight: 800, color: "var(--mimosa)",
+                            background: "rgba(255,201,75,.15)", padding: "2px 9px",
+                            borderRadius: 5, display: "inline-block", marginBottom: 7,
+                        }}>📅 {current.annee}</span>
+
+                        <p style={{ fontSize: 18, fontWeight: 900, color: "#fff", lineHeight: 1.2, marginBottom: 5 }}>
+                            {current.titre}
+                        </p>
+                        {current.titreOriginal && current.titreOriginal !== current.titre && (
+                            <p style={{ fontSize: 11, color: "rgba(255,255,255,.55)", fontStyle: "italic", marginBottom: 5 }}>
+                                {current.titreOriginal}
+                            </p>
+                        )}
+                        {current.note && (
+                            <p style={{ fontSize: 12, color: "var(--mimosa)", fontWeight: 700, marginBottom: 4 }}>
+                                ★ {current.note}/10
+                            </p>
+                        )}
+                        {current.realisateur && (
+                            <p style={{ fontSize: 11, color: "rgba(255,255,255,.7)", marginBottom: 3 }}>
+                                🎥 <strong>{current.realisateur}</strong>
+                            </p>
+                        )}
+                        {current.acteurs.length > 0 && (
+                            <p style={{ fontSize: 11, color: "rgba(255,255,255,.6)" }}>
+                                🎭 {current.acteurs.join(" · ")}
+                            </p>
+                        )}
+                    </div>
                 </div>
-            )}
-            <div
-                onTouchStart={e => setTouchStartX(e.touches[0].clientX)}
-                onTouchEnd={e => {
-                    if (touchStartX === null) return
-                    const diff = touchStartX - e.changedTouches[0].clientX
-                    if (Math.abs(diff) > 40) diff > 0 ? goNext() : goPrev()
-                    setTouchStartX(null)
-                }}
-            >
-                {loading ? (
-                    <div style={{ textAlign: "center", padding: "20px", color: "var(--text-muted)" }}>Chargement...</div>
-                ) : current ? (
-                    <div style={{ display: "flex", gap: "16px", alignItems: "flex-start" }}>
-                        <div style={{ flexShrink: 0, width: "90px" }}>
-                            {current.affiche ? (
-                                <img src={current.affiche} alt={current.titre} style={{ width: "90px", height: "135px", objectFit: "cover", borderRadius: "8px", boxShadow: "0 4px 12px rgba(0,0,0,0.2)" }} />
-                            ) : (
-                                <div style={{ width: "90px", height: "135px", borderRadius: "8px", background: "rgba(158,127,92,0.12)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "2.5rem" }}>🎬</div>
-                            )}
-                        </div>
-                        <div style={{ flex: 1 }}>
-                            <span style={{ fontSize: "0.72rem", fontWeight: 700, color: "#9E7F5C", background: "rgba(158,127,92,0.12)", padding: "2px 10px", borderRadius: "20px", display: "inline-block", marginBottom: "6px" }}>
-                                📅 {current.annee}
-                            </span>
-                            <p style={{ fontSize: "1rem", fontWeight: 700, color: "var(--text-dark)", lineHeight: 1.2, marginBottom: "4px" }}>{current.titre}</p>
-                            {current.titreOriginal && (
-                                <p style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginBottom: "6px", fontStyle: "italic" }}>{current.titreOriginal}</p>
-                            )}
-                            {current.note && (
-                                <div style={{ display: "flex", alignItems: "center", gap: "4px", marginBottom: "8px" }}>
-                                    <span style={{ color: "#C8B49A", fontSize: "0.8rem" }}>★</span>
-                                    <span style={{ fontSize: "0.78rem", fontWeight: 600, color: "var(--text-dark)" }}>{current.note}/10</span>
-                                </div>
-                            )}
-                            {current.realisateur && (
-                                <p style={{ fontSize: "0.78rem", color: "var(--text-muted)", marginBottom: "4px" }}>🎥 <strong>{current.realisateur}</strong></p>
-                            )}
-                            {current.acteurs.length > 0 && (
-                                <p style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>🎭 {current.acteurs.join(" · ")}</p>
-                            )}
-                        </div>
-                    </div>
-                ) : (
-                    <p style={{ color: "var(--text-muted)", textAlign: "center" }}>Aucun film trouvé.</p>
-                )}
-                {current?.synopsis && (
-                    <p style={{ fontSize: "0.8rem", lineHeight: 1.6, color: "var(--text-muted)", marginTop: "14px", borderLeft: "3px solid #C8B49A", paddingLeft: "12px" }}>
+
+                {current.synopsis && (
+                    <p style={{
+                        fontSize: 12, lineHeight: 1.7, color: "rgba(255,255,255,.7)",
+                        marginTop: 14, borderLeft: "3px solid var(--mimosa)", paddingLeft: 12,
+                    }}>
                         {current.synopsis}
                     </p>
                 )}
             </div>
-        </Card>
+
+            {/* ── Liste des autres films ── */}
+            {films.length > 1 && (
+                <div className={styles.card}>
+                    <div className={styles.cardTitle}>TOUS LES FILMS DU JOUR</div>
+                    {films.map((f, i) => (
+                        <div
+                            key={f.id}
+                            onClick={() => setSelected(i)}
+                            style={{
+                                display: "flex", gap: 12, alignItems: "center",
+                                padding: "10px 8px", borderRadius: 10, cursor: "pointer",
+                                background: i === selected ? "var(--teal3)" : "transparent",
+                                transition: "background .15s",
+                                borderBottom: i < films.length - 1 ? "1px solid var(--border)" : "none",
+                            }}
+                        >
+                            <div style={{
+                                width: 40, height: 56, borderRadius: 6, flexShrink: 0,
+                                overflow: "hidden", background: "var(--teal3)",
+                                display: "flex", alignItems: "center", justifyContent: "center",
+                            }}>
+                                {f.affiche
+                                    ? <img src={f.affiche} alt={f.titre} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                                    : <span style={{ fontSize: 18 }}>🎬</span>
+                                }
+                            </div>
+                            <div style={{ flex: 1 }}>
+                                <p style={{
+                                    fontSize: 13, fontWeight: i === selected ? 800 : 600,
+                                    color: i === selected ? "var(--teal)" : "var(--text-dark)",
+                                    lineHeight: 1.3, marginBottom: 2,
+                                }}>{f.titre}</p>
+                                <p style={{ fontSize: 11, color: "var(--text-mid)" }}>
+                                    {f.realisateur} · {f.annee}
+                                    {f.note ? <span style={{ color: "var(--teal)", fontWeight: 700, marginLeft: 6 }}>★ {f.note}</span> : null}
+                                </p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            )}
+        </div>
     )
 }

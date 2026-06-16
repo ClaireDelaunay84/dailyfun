@@ -1,27 +1,26 @@
 @import "tailwindcss";
 
 :root {
-    /* ── Palette Soft Sunrise ── */
-    --bg:             #1a1520;
-    --bg-card:        rgba(146,171,211,0.15);
-    --bg-sand:        rgba(228,156,149,0.15);
-    --bg-taupe-rose:  rgba(250,192,152,0.15);
-    --bg-gris-beige:  rgba(133,153,136,0.15);
-    --bg-taupe-brun:  rgba(146,171,211,0.2);
+    --teal:        #00555a;
+    --teal2:       #007a82;
+    --teal3:       rgba(0, 85, 90, 0.09);
+    --teal4:       rgba(0, 85, 90, 0.05);
+    --mimosa:      #ffc94b;
+    --mimosa2:     #ffd97a;
+    --mimosa3:     rgba(255, 201, 75, 0.18);
+    --mimosa4:     rgba(255, 201, 75, 0.08);
+    --cream:       #fafaf7;
+    --border:      rgba(0, 85, 90, 0.1);
 
-    --sand-border:    rgba(255,255,255,0.15);
-    --taupe:          #92ABD3;
-    --brown:          #ffffff;
-    --muted:          rgba(255,255,255,0.65);
-    --cream:          #ffffff;
+    --text-dark:   #111111;
+    --text-mid:    #555555;
+    --text-light:  #999999;
 
-    --font-body:      var(--font-dm-sans, sans-serif);
-    --font-script:    'Qwitcher Grypen', cursive;
-    --font-licorice:  'Qwitcher Grypen', cursive;
-    --font-jost:      var(--font-dm-sans, sans-serif);
+    --radius:      14px;
+    --radius-sm:   10px;
 
-    --text-dark:  #2A2A2A;
-    --text-muted: #555555;
+    --font-body:   var(--font-dm-sans, system-ui, sans-serif);
+    --font-script: 'Qwitcher Grypen', cursive;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,5 +29,6 @@ body {
     color: var(--text-dark);
     font-family: var(--font-body);
     min-height: 100vh;
+    background: var(--cream);
     overflow-x: hidden;
 }

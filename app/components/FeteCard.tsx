@@ -1,30 +1,41 @@
-import Card from "./Card"
+import styles from "../page.module.css"
 import { getFeteduJour } from "../data/fetes"
 
-export default function FeteCard() {
+export default function FeteCard({ compact = false }: { compact?: boolean }) {
     const fete = getFeteduJour()
-    return (
-        <Card title="Fête du jour" bgColor="#EAE0D0" accent="#5C4430">
-            <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-                <p style={{
-                    fontFamily: "var(--font-licorice)",
-                    fontSize: "3rem",
-                    color: "#5C4430",
-                    lineHeight: 1.1,
-                }}>
-                    {fete.prenom}
-                </p>
-                <p style={{
-                    fontSize: "0.95rem",
-                    lineHeight: 1.8,
-                    color: "var(--text-muted)",
-                    fontStyle: "italic",
-                    borderLeft: "3px solid #C8B49A",
-                    paddingLeft: "14px",
-                }}>
-                    {fete.anecdote}
-                </p>
+
+    if (compact) {
+        return (
+            <div className={styles.card}>
+                <div className={styles.cardTitle}>FÊTE DU JOUR</div>
+                <div style={{ fontSize: 20, fontWeight: 900, color: "var(--teal)", marginBottom: 3 }}>
+                    🌸 {fete.prenom}
+                </div>
+                {fete.anecdote && (
+                    <p style={{ fontSize: 12, color: "var(--text-mid)", lineHeight: 1.5 }}>
+                        {fete.anecdote.slice(0, 100)}{fete.anecdote.length > 100 ? "…" : ""}
+                    </p>
+                )}
             </div>
-        </Card>
+        )
+    }
+
+    return (
+        <div>
+            <div className={styles.heroTeal} style={{ marginBottom: 12 }}>
+                <div className={styles.badge}>FÊTE DU JOUR</div>
+                <div style={{ fontSize: 28, fontWeight: 900, color: "#fff", margin: "8px 0 4px" }}>
+                    🌸 {fete.prenom}
+                </div>
+            </div>
+            <div className={styles.card}>
+                <div className={styles.cardTitle}>À PROPOS</div>
+                {fete.anecdote && (
+                    <p style={{ fontSize: 13, lineHeight: 1.75, color: "var(--text-mid)", fontStyle: "italic", borderLeft: "3px solid var(--mimosa)", paddingLeft: 12 }}>
+                        {fete.anecdote}
+                    </p>
+                )}
+            </div>
+        </div>
     )
 }

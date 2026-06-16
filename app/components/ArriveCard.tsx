@@ -1,85 +1,117 @@
 "use client"
 import { useState, useEffect } from "react"
-import Card from "./Card"
+import styles from "../page.module.css"
 
 type Evenement = { annee: number; texte: string; imageUrl: string | null }
 
 export default function ArriveCard() {
     const [evenements, setEvenements] = useState<Evenement[]>([])
-    const [index, setIndex] = useState(0)
-    const [fading, setFading] = useState(false)
+    const [selected, setSelected] = useState(0)
     const [loading, setLoading] = useState(true)
-    const [touchStartX, setTouchStartX] = useState<number | null>(null)
 
     const today = new Date()
     const jour = today.getDate()
     const mois = today.toLocaleDateString("fr-FR", { month: "long" })
-    const MM = String(today.getMonth()+1).padStart(2,"0")
-    const DD = String(today.getDate()).padStart(2,"0")
+    const MM = String(today.getMonth() + 1).padStart(2, "0")
+    const DD = String(today.getDate()).padStart(2, "0")
 
     useEffect(() => {
         fetch(`/api/onthisday?type=events`)
-            .then(r => r.json()).then(data => {
-            const sorted = [...(data?.events??[])].sort((a:any,b:any)=>b.year-a.year)
-            const step = Math.floor(sorted.length/5)
-            setEvenements([0,1,2,3,4].map(i=>sorted[i*step]??sorted[i]).filter(Boolean).map((e:any)=>({
-                annee: e.year, texte: e.text,
-                imageUrl: e.pages?.[0]?.thumbnail?.source?.replace(/\/\d+px-/,"/400px-")??null
-            })))
-            setLoading(false)
-        }).catch(()=>setLoading(false))
+            .then(r => r.json())
+            .then(data => {
+                const sorted = [...(data?.events ?? [])].sort((a: any, b: any) => b.year - a.year)
+                const step = Math.floor(sorted.length / 5)
+                const selection = [0, 1, 2, 3, 4]
+                    .map(i => sorted[i * step] ?? sorted[i])
+                    .filter(Boolean)
+                    .map((e: any) => ({
+                        annee: e.year,
+                        texte: e.text,
+                        imageUrl: e.pages?.[0]?.thumbnail?.source ?? null,
+                    }))
+                setEvenements(selection)
+                setLoading(false)
+            })
+            .catch(() => setLoading(false))
     }, [MM, DD])
 
-    useEffect(() => {
-        if (evenements.length <= 1) return
-        const interval = setInterval(() => {
-            setIndex(i => (i + 1) % evenements.length)
-        }, 20000)
-        return () => clearInterval(interval)
-    }, [evenements.length])
+    const current = evenements[selected]
 
-    const goTo = (i: number) => { setFading(true); setTimeout(() => { setIndex(i); setFading(false) }, 300) }
-    const goPrev = () => goTo((index - 1 + evenements.length) % evenements.length)
-    const goNext = () => goTo((index + 1) % evenements.length)
+    if (loading) return (
+        <div className={styles.heroTeal}>
+            <div className={styles.badge}>C'EST ARRIVÉ</div>
+            <p style={{ color: "rgba(255,255,255,.7)", fontSize: 13 }}>Chargement...</p>
+        </div>
+    )
 
-    const current = evenements[index]
+    if (!current) return (
+        <div className={styles.heroTeal}>
+            <div className={styles.badge}>C'EST ARRIVÉ</div>
+            <p style={{ color: "rgba(255,255,255,.7)", fontSize: 13 }}>Aucun événement trouvé.</p>
+        </div>
+    )
 
     return (
-        <Card title={`C'est arrivé un ${jour} ${mois}`} bgColor="#DCCDC0" accent="#5C4430">
-            {evenements.length > 1 && (
-                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
-                    <button onClick={goPrev} style={{ width: "34px", height: "34px", borderRadius: "50%", border: "1.5px solid #D9CCBA", background: "rgba(255,255,255,0.5)", cursor: "pointer", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, color: "#9E7F5C" }}>‹</button>
-                    <div style={{ display: "flex", gap: "6px", flex: 1, justifyContent: "center" }}>
-                        {evenements.map((_, i) => (
-                            <button key={i} onClick={() => goTo(i)} style={{ width: i === index ? "22px" : "10px", height: "10px", borderRadius: "20px", background: i === index ? "#9E7F5C" : "#9E7F5C33", border: "none", cursor: "pointer", padding: 0, transition: "all 0.3s ease" }} />
-                        ))}
-                    </div>
-                    <button onClick={goNext} style={{ width: "34px", height: "34px", borderRadius: "50%", border: "1.5px solid #D9CCBA", background: "rgba(255,255,255,0.5)", cursor: "pointer", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, color: "#9E7F5C" }}>›</button>
-                </div>
-            )}
-            {loading ? <p style={{ color: "var(--text-muted)" }}>Chargement...</p> : current ? (
-                <div
-                    onTouchStart={e => setTouchStartX(e.touches[0].clientX)}
-                    onTouchEnd={e => {
-                        if (touchStartX === null) return
-                        const diff = touchStartX - e.changedTouches[0].clientX
-                        if (Math.abs(diff) > 40) diff > 0 ? goNext() : goPrev()
-                        setTouchStartX(null)
-                    }}
-                    style={{ opacity: fading ? 0 : 1, transition: "opacity 0.3s", display: "flex", gap: "16px", alignItems: "flex-start" }}
-                >
-                    <div style={{ width: "80px", height: "80px", borderRadius: "14px", flexShrink: 0, overflow: "hidden", background: "rgba(158,127,92,0.1)", border: "2px solid #D9CCBA", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div>
+            {/* ── Hero teal ── */}
+            <div className={styles.heroTeal} style={{ marginBottom: 12 }}>
+                <div className={styles.badge}>C'EST ARRIVÉ UN {jour} {mois.toUpperCase()}</div>
+
+                <div style={{ display: "flex", gap: 16, alignItems: "flex-start", marginTop: 12 }}>
+                    <div style={{
+                        width: 72, height: 72, borderRadius: 12, flexShrink: 0,
+                        overflow: "hidden", background: "rgba(255,255,255,.1)",
+                        border: "1px solid rgba(255,255,255,.15)",
+                        display: "flex", alignItems: "center", justifyContent: "center",
+                    }}>
                         {current.imageUrl
-                            ? <img src={`/api/wiki-image?url=${encodeURIComponent(current.imageUrl!)}`} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                            : <span style={{ fontSize: "2.5rem" }}>📅</span>
+                            ? <img src={`/api/wiki-image?url=${encodeURIComponent(current.imageUrl)}`} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                            : <span style={{ fontSize: 28 }}>📅</span>
                         }
                     </div>
                     <div style={{ flex: 1 }}>
-                        <p style={{ fontFamily: "var(--font-licorice)", fontSize: "2.8rem", color: "#5C4430", lineHeight: 1, marginBottom: "8px" }}>En {current.annee}</p>
-                        <p style={{ fontSize: "0.95rem", lineHeight: 1.7, color: "var(--text-dark)" }}>{current.texte}</p>
+                        <p style={{ fontSize: 32, fontWeight: 900, color: "#fff", lineHeight: 1, marginBottom: 8 }}>
+                            En {current.annee}
+                        </p>
+                        <p style={{ fontSize: 14, lineHeight: 1.7, color: "rgba(255,255,255,.8)" }}>
+                            {current.texte}
+                        </p>
                     </div>
                 </div>
-            ) : <p style={{ color: "var(--text-muted)" }}>Aucun événement trouvé.</p>}
-        </Card>
+            </div>
+
+            {/* ── Liste des autres événements ── */}
+            {evenements.length > 1 && (
+                <div className={styles.card}>
+                    <div className={styles.cardTitle}>AUTRES ÉVÉNEMENTS</div>
+                    {evenements.map((e, i) => (
+                        <div
+                            key={i}
+                            onClick={() => setSelected(i)}
+                            style={{
+                                display: "flex", gap: 12, alignItems: "flex-start",
+                                padding: "9px 8px", borderRadius: 8, cursor: "pointer",
+                                background: i === selected ? "var(--teal3)" : "transparent",
+                                transition: "background .15s",
+                                borderBottom: i < evenements.length - 1 ? "1px solid var(--border)" : "none",
+                            }}
+                        >
+                            <span style={{
+                                fontSize: 12, fontWeight: 900,
+                                color: i === selected ? "var(--teal)" : "var(--teal)",
+                                minWidth: 36, flexShrink: 0, paddingTop: 1,
+                            }}>{e.annee}</span>
+                            <p style={{
+                                fontSize: 12, lineHeight: 1.55,
+                                color: i === selected ? "var(--teal)" : "var(--text-dark)",
+                                fontWeight: i === selected ? 600 : 400,
+                            }}>
+                                {e.texte.length > 100 ? e.texte.slice(0, 100) + "…" : e.texte}
+                            </p>
+                        </div>
+                    ))}
+                </div>
+            )}
+        </div>
     )
 }
