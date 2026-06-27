@@ -59,8 +59,8 @@ export default function DataDeletionPage() {
                     <h2 style={{fontSize: "1rem", fontWeight: 600, marginBottom: "10px"}}>Demande de suppression</h2>
                     <p>
                         Pour toute demande relative à vos données, contactez-nous à :{" "}
-                        <a href="mailto:clairedelaunay84@gmail.com" style={{color: "#9E7F5C"}}>
-                            clairedelaunay84@gmail.com
+                        <a href="mailto:contactdailyfun@gmail.com" style={{color: "#9E7F5C"}}>
+                            contactdailyfun@gmail.com
                         </a>
                     </p>
                     <p style={{marginTop: "10px"}}>

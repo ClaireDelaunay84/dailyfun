@@ -112,8 +112,8 @@ export default function PrivacyPage() {
                     <h2 style={{fontSize: "1rem", fontWeight: 600, marginBottom: "10px"}}>7. Contact</h2>
                     <p>
                         Pour toute question relative à cette politique de confidentialité :<br/>
-                        <a href="mailto:clairedelaunay84@gmail.com"
-                           style={{color: "#9E7F5C"}}>clairedelaunay84@gmail.com</a>
+                        <a href="mailto:contactdailyfun@gmail.com"
+                           style={{color: "#9E7F5C"}}>contactdailyfun@gmail.com</a>
                     </p>
                 </section>
 
